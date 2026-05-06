@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<!-- ============================================================
+  EDIT HERE #1 — SITE TITLE (browser tab mein dikhta hai)
+  ============================================================ -->
+<title>CharVault — Premium Character Marketplace</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0a0f;
+  --surface:#13131f;
+  --card:#1a1a2e;
+  --border:#2a2a4a;
+  --accent:#7c3aed;
+  --accent2:#06d6a0;
+  --text:#e2e2f0;
+  --muted:#8888aa;
+  --gold:#f59e0b;
+  --danger:#ef4444;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
+h1,h2,h3,.price,.tag,.logo,.card-name{font-family:'Orbitron',monospace}
+
+/* ---- HEADER ---- */
+.header{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.logo{font-size:20px;font-weight:700;letter-spacing:2px;color:var(--accent2)}
+.logo span{color:var(--accent)}
+.cart-btn{background:var(--accent);border:none;color:#fff;padding:9px 20px;border-radius:8px;cursor:pointer;font-family:'Orbitron',monospace;font-size:12px;display:flex;align-items:center;gap:8px;transition:background .2s}
+.cart-btn:hover{background:#6d28d9}
+.badge{background:#ef4444;color:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
+
+/* ---- HERO ---- */
+.hero{padding:56px 28px 32px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(124,58,237,0.12) 0%,transparent 70%);pointer-events:none}
+.hero h1{font-size:32px;font-weight:700;letter-spacing:4px;margin-bottom:10px;line-height:1.2}
+.hero h1 .glow{color:var(--accent2);text-shadow:0 0 24px rgba(6,214,160,0.35)}
+.hero p{color:var(--muted);font-size:15px;max-width:520px;margin:0 auto 8px}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(6,214,160,0.08);border:1px solid rgba(6,214,160,0.25);color:var(--accent2);font-size:12px;padding:5px 14px;border-radius:20px;margin-top:14px}
+
+/* ---- FILTERS ---- */
+.filters{display:flex;gap:8px;padding:0 28px 20px;flex-wrap:wrap}
+.filter-btn{background:transparent;border:1px solid var(--border);color:var(--muted);padding:7px 16px;border-radius:7px;cursor:pointer;font-size:13px;transition:all .2s}
+.filter-btn.active,.filter-btn:hover{border-color:var(--accent);color:var(--accent);background:rgba(124,58,237,0.1)}
+
+/* ---- PRODUCT GRID ---- */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px;padding:0 28px 40px}
+
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;position:relative;transition:all .25s;overflow:hidden}
+.card::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.02) 0%,transparent 60%);pointer-events:none}
+.card:hover{border-color:var(--accent);transform:translateY(-4px);box-shadow:0 12px 40px rgba(124,58,237,0.2)}
+.card.sold-card{opacity:.5;pointer-events:none}
+
+.rarity-badge{position:absolute;top:13px;right:13px;font-size:10px;font-family:'Orbitron',monospace;padding:3px 9px;border-radius:5px;font-weight:600;letter-spacing:.5px}
+.legendary{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.epic{background:rgba(245,158,11,0.15);color:var(--gold);border:1px solid rgba(245,158,11,0.3)}
+.rare{background:rgba(124,58,237,0.2);color:#a78bfa;border:1px solid rgba(124,58,237,0.4)}
+.common{background:rgba(136,136,170,0.12);color:var(--muted);border:1px solid var(--border)}
+
+.card-icon{font-size:46px;text-align:center;margin-bottom:14px;line-height:1}
+.card-name{font-size:14px;font-weight:600;margin-bottom:5px;letter-spacing:1px}
+.card-code{color:var(--muted);font-size:12px;margin-bottom:12px;font-family:monospace;letter-spacing:.5px}
+.card-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.tag{font-size:10px;padding:3px 9px;border-radius:5px;background:rgba(6,214,160,0.1);color:var(--accent2);border:1px solid rgba(6,214,160,0.2);font-family:'Orbitron',monospace;letter-spacing:.5px}
+.card-footer{display:flex;align-items:center;justify-content:space-between}
+.price{font-size:15px;font-weight:600;color:var(--gold)}
+.price small{font-size:11px;color:var(--muted);font-weight:400;margin-left:3px;font-family:'DM Sans',sans-serif}
+.add-btn{background:var(--accent);border:none;color:#fff;padding:8px 16px;border-radius:8px;cursor:pointer;font-size:12px;font-weight:500;transition:all .2s}
+.add-btn:hover{background:#6d28d9}
+.add-btn.added{background:var(--accent2);color:#0a0a0f;font-weight:700}
+.sold-tag{background:rgba(239,68,68,0.1);color:#f87171;padding:8px 14px;border-radius:8px;font-size:12px;border:1px solid rgba(239,68,68,0.25)}
+
+/* ---- OVERLAY ---- */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,0.82);z-index:200;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
+.overlay.open{display:flex}
+.drawer{background:var(--surface);border:1px solid var(--border);border-radius:18px;width:100%;max-width:430px;max-height:92vh;overflow-y:auto;padding:26px}
+.drawer-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
+.drawer-title{font-family:'Orbitron',monospace;font-size:16px;font-weight:600;color:var(--accent2);letter-spacing:1px}
+.close-btn{background:transparent;border:1px solid var(--border);color:var(--muted);width:34px;height:34px;border-radius:8px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.close-btn:hover{border-color:var(--danger);color:var(--danger)}
+
+/* ---- CART ITEMS ---- */
+.cart-item{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--border)}
+.ci-icon{font-size:30px;min-width:36px;text-align:center}
+.ci-info{flex:1;min-width:0}
+.ci-name{font-family:'Orbitron',monospace;font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ci-code{font-size:12px;color:var(--muted);font-family:monospace}
+.ci-price{font-family:'Orbitron',monospace;color:var(--gold);font-size:13px;white-space:nowrap}
+.remove-btn{background:transparent;border:none;color:var(--danger);cursor:pointer;font-size:18px;padding:4px;opacity:.7;transition:opacity .2s}
+.remove-btn:hover{opacity:1}
+
+.cart-total{display:flex;justify-content:space-between;align-items:center;margin:18px 0 14px;padding:14px;background:rgba(124,58,237,0.1);border-radius:10px;border:1px solid rgba(124,58,237,0.2)}
+.total-label{font-size:13px;color:var(--muted)}
+.total-val{font-family:'Orbitron',monospace;font-size:20px;color:var(--gold)}
+
+/* ---- CRYPTO SELECT ---- */
+.step-label{font-size:11px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px}
+.crypto-options{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px}
+.crypto-opt{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 8px;text-align:center;cursor:pointer;transition:all .2s}
+.crypto-opt:hover,.crypto-opt.selected{border-color:var(--accent2);background:rgba(6,214,160,0.08)}
+.crypto-icon{font-size:24px;margin-bottom:5px}
+.crypto-name{font-size:11px;font-family:'Orbitron',monospace;color:var(--muted)}
+.crypto-opt.selected .crypto-name{color:var(--accent2)}
+
+.pay-btn{width:100%;background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;color:#fff;padding:15px;border-radius:10px;cursor:pointer;font-family:'Orbitron',monospace;font-size:13px;font-weight:700;letter-spacing:1.5px;transition:opacity .2s}
+.pay-btn:hover{opacity:.88}
+
+/* ---- PAYMENT SCREEN ---- */
+.payment-screen{text-align:center}
+.amount-due{font-family:'Orbitron',monospace;font-size:26px;color:var(--gold);margin:10px 0 4px}
+.wallet-label{font-size:12px;color:var(--muted);margin-bottom:8px;text-align:left}
+.wallet-box{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:6px;word-break:break-all;font-family:monospace;font-size:12px;color:var(--accent2);text-align:left;cursor:pointer;transition:border-color .2s}
+.wallet-box:hover{border-color:var(--accent2)}
+.copy-hint{font-size:11px;color:var(--muted);margin-bottom:16px;text-align:left}
+.confirm-btn{width:100%;background:var(--accent2);border:none;color:#0a0a0f;padding:14px;border-radius:10px;cursor:pointer;font-family:'Orbitron',monospace;font-size:12px;font-weight:700;letter-spacing:1px;transition:opacity .2s}
+.confirm-btn:hover{opacity:.88}
+.back-link{display:block;text-align:center;color:var(--muted);font-size:13px;cursor:pointer;margin-top:12px;transition:color .2s}
+.back-link:hover{color:var(--text)}
+
+/* ---- SUCCESS ---- */
+.success-box{background:rgba(6,214,160,0.06);border:1px solid rgba(6,214,160,0.25);border-radius:14px;padding:22px;text-align:center;margin-top:4px}
+.success-icon{font-size:48px;margin-bottom:12px}
+.success-title{font-family:'Orbitron',monospace;font-size:15px;color:var(--accent2);margin-bottom:6px;letter-spacing:1px}
+.success-sub{font-size:13px;color:var(--muted);margin-bottom:18px}
+.detail-table{width:100%;border-collapse:collapse;margin-bottom:12px}
+.detail-table tr{border-bottom:1px solid var(--border)}
+.detail-table tr:last-child{border:none}
+.detail-table td{padding:8px 4px;font-size:13px}
+.detail-table td:first-child{color:var(--muted);text-align:left}
+.detail-table td:last-child{font-family:monospace;color:var(--text);text-align:right}
+.reset-btn{width:100%;background:transparent;border:1px solid var(--border);color:var(--muted);padding:11px;border-radius:10px;cursor:pointer;font-size:13px;margin-top:14px;transition:all .2s}
+.reset-btn:hover{border-color:var(--text);color:var(--text)}
+
+/* ---- EMPTY CART ---- */
+.empty-cart{text-align:center;padding:44px 20px;color:var(--muted)}
+.empty-icon{font-size:52px;margin-bottom:14px;opacity:.4}
+
+/* ---- FOOTER ---- */
+.footer{border-top:1px solid var(--border);padding:24px 28px;text-align:center;color:var(--muted);font-size:13px}
+.footer span{color:var(--accent2)}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <!-- ============================================================
+    EDIT HERE #2 — SITE LOGO TEXT
+    ============================================================ -->
+  <div class="logo">CHAR<span>VAULT</span></div>
+
+  <button class="cart-btn" onclick="openCart()">
+    <i class="ti ti-shopping-cart"></i>
+    CART
+    <span class="badge" id="cart-count">0</span>
+  </button>
+</div>
+
+<!-- HERO SECTION -->
+<div class="hero">
+  <!-- ============================================================
+    EDIT HERE #3 — HERO HEADING & SUBTITLE
+    ============================================================ -->
+  <h1>PREMIUM <span class="glow">CHARACTERS</span></h1>
+  <p>Exclusive character names with unique usercodes. Verified & rare — yours forever.</p>
+  <div class="hero-badge">
+    <i class="ti ti-shield-check" style="font-size:14px"></i>
+    Crypto payments · Instant delivery
+  </div>
+</div>
+
+<!-- FILTERS -->
+<div class="filters">
+  <!-- ============================================================
+    EDIT HERE #4 — FILTER BUTTONS
+    Category values: "all", "fps", "moba", "battle", "rpg"
+    (game field in products array ke saath match karna chahiye)
+    ============================================================ -->
+  <button class="filter-btn active" onclick="filterBy('all',this)">All</button>
+  <button class="filter-btn" onclick="filterBy('fps',this)">FPS</button>
+  <button class="filter-btn" onclick="filterBy('moba',this)">MOBA</button>
+  <button class="filter-btn" onclick="filterBy('battle',this)">Battle Royale</button>
+  <button class="filter-btn" onclick="filterBy('rpg',this)">RPG</button>
+</div>
+
+<!-- PRODUCT GRID — auto generated from JS -->
+<div class="grid" id="product-grid"></div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <!-- ============================================================
+    EDIT HERE #5 — FOOTER TEXT
+    ============================================================ -->
+  <p>© 2025 <span>CharVault</span> · All characters are verified originals · Pay with crypto only</p>
+</div>
+
+<!-- CART OVERLAY -->
+<div class="overlay" id="cart-overlay">
+  <div class="drawer" id="drawer-content"></div>
+</div>
+
+<script>
+// ================================================================
+//  EDIT HERE #6 — APNE PRODUCTS YAHAN ADD KARO
+//
+//  Har product ka format:
+//  {
+//    id:       unique number (1, 2, 3...)
+//    icon:     emoji (character ka vibe)
+//    name:     "CHARACTER_NAME"    (CAPS mein)
+//    code:     "#XXXXXX"           (usercode)
+//    rarity:   "legendary" | "epic" | "rare" | "common"
+//    tags:     ["Tag1","Tag2"]     (max 3 recommended)
+//    usd:      price in USD        (e.g. 2.50)
+//    game:     "fps"|"moba"|"battle"|"rpg"   (filter ke liye)
+//    sold:     false               (bechne ke baad true kar do)
+//  }
+// ================================================================
+const PRODUCTS = [
+  {id:1, icon:"⚡", name:"SHADOWBYTE",  code:"#SB2047", rarity:"legendary", tags:["FPS","Premium"],       usd:4.20,  game:"fps",    sold:false},
+  {id:2, icon:"🔥", name:"VOIDPULSE",   code:"#VP9931", rarity:"epic",      tags:["Battle Royale"],       usd:2.80,  game:"battle", sold:false},
+  {id:3, icon:"🌀", name:"NEONRIFT",    code:"#NR5510", rarity:"rare",      tags:["MOBA","Unique"],       usd:2.10,  game:"moba",   sold:false},
+  {id:4, icon:"💀", name:"DEATHMARK",   code:"#DM0001", rarity:"legendary", tags:["FPS","Rare"],          usd:5.25,  game:"fps",    sold:false},
+  {id:5, icon:"🌩️",name:"STORMCALL",   code:"#SC7772", rarity:"epic",      tags:["Battle Royale"],       usd:3.15,  game:"battle", sold:false},
+  {id:6, icon:"🎯", name:"HEXSHOT",     code:"#HS3301", rarity:"rare",      tags:["FPS"],                 usd:1.75,  game:"fps",    sold:false},
+  {id:7, icon:"🧊", name:"FROSTCLAW",   code:"#FC8820", rarity:"rare",      tags:["MOBA"],                usd:1.40,  game:"moba",   sold:false},
+  {id:8, icon:"🌑", name:"DARKMELD",    code:"#DM5599", rarity:"common",    tags:["Any Game"],            usd:0.70,  game:"rpg",    sold:false},
+];
+
+// ================================================================
+//  EDIT HERE #7 — CRYPTO WALLET ADDRESSES
+//  Apne real wallet addresses yahan daalo
+// ================================================================
+const WALLETS = {
+  USDT: "TXyz_APNA_USDT_WALLET_ADDRESS_YAHAN",
+  BTC:  "bc1q_APNA_BTC_WALLET_ADDRESS_YAHAN",
+  ETH:  "0x_APNA_ETH_WALLET_ADDRESS_YAHAN",
+};
+
+// ================================================================
+//  EDIT HERE #8 — CRYPTO CONVERSION RATES (approx)
+//  Kabhi kabhi update kar lena
+// ================================================================
+const RATES = {
+  USDT: 1,        // 1 USDT = $1
+  BTC:  67000,    // 1 BTC = $67,000
+  ETH:  3200,     // 1 ETH = $3,200
+};
+
+// ---- STATE ----
+let cart = [];
+let selectedCrypto = "USDT";
+let currentView = "cart";
+let activeFilter = "all";
+
+// ---- FILTER ----
+function filterBy(cat, btn) {
+  activeFilter = cat;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderGrid();
+}
+
+// ---- RENDER GRID ----
+function renderGrid() {
+  const list = activeFilter === 'all' ? PRODUCTS : PRODUCTS.filter(p => p.game === activeFilter);
+  const g = document.getElementById('product-grid');
+  g.innerHTML = list.map(p => {
+    const inCart = cart.find(c => c.id === p.id);
+    return `
+    <div class="card ${p.sold ? 'sold-card' : ''}">
+      <span class="rarity-badge ${p.rarity}">${p.rarity.toUpperCase()}</span>
+      <div class="card-icon">${p.icon}</div>
+      <div class="card-name">${p.name}</div>
+      <div class="card-code">${p.code}</div>
+      <div class="card-tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+      <div class="card-footer">
+        <div class="price">$${p.usd.toFixed(2)}<small>USD</small></div>
+        ${p.sold
+          ? `<span class="sold-tag">SOLD</span>`
+          : `<button class="add-btn ${inCart ? 'added' : ''}" onclick="toggleCart(${p.id})">
+               ${inCart ? '✓ Added' : 'Add to Cart'}
+             </button>`
+        }
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ---- CART TOGGLE ----
+function toggleCart(id) {
+  const p = PRODUCTS.find(x => x.id === id);
+  if (!p || p.sold) return;
+  if (cart.find(c => c.id === id)) {
+    cart = cart.filter(c => c.id !== id);
+  } else {
+    cart.push(p);
+  }
+  updateCount();
+  renderGrid();
+}
+
+function updateCount() {
+  document.getElementById('cart-count').textContent = cart.length;
+}
+
+function totalUSD() {
+  return cart.reduce((s, p) => s + p.usd, 0);
+}
+
+function cryptoAmount() {
+  return (totalUSD() / RATES[selectedCrypto]).toFixed(
+    selectedCrypto === 'USDT' ? 2 : selectedCrypto === 'BTC' ? 6 : 5
+  );
+}
+
+// ---- OPEN CART ----
+function openCart() {
+  currentView = 'cart';
+  renderDrawer();
+  document.getElementById('cart-overlay').classList.add('open');
+}
+
+function closeCart() {
+  document.getElementById('cart-overlay').classList.remove('open');
+}
+
+// ---- COPY WALLET ----
+function copyWallet() {
+  navigator.clipboard.writeText(WALLETS[selectedCrypto]).catch(()=>{});
+  const box = document.getElementById('wallet-addr');
+  if(box){ box.textContent = '✓ Copied!'; setTimeout(()=>{ box.textContent = WALLETS[selectedCrypto]; },2000); }
+}
+
+// ---- RENDER DRAWER ----
+function renderDrawer() {
+  const d = document.getElementById('drawer-content');
+
+  if (currentView === 'cart') {
+    if (cart.length === 0) {
+      d.innerHTML = `
+        <div class="drawer-header">
+          <div class="drawer-title">YOUR CART</div>
+          <button class="close-btn" onclick="closeCart()">✕</button>
+        </div>
+        <div class="empty-cart">
+          <div class="empty-icon"><i class="ti ti-shopping-cart-off"></i></div>
+          <p>Cart is empty — go add some characters!</p>
+        </div>`;
+      return;
+    }
+
+    d.innerHTML = `
+      <div class="drawer-header">
+        <div class="drawer-title">YOUR CART</div>
+        <button class="close-btn" onclick="closeCart()">✕</button>
+      </div>
+      ${cart.map(p => `
+        <div class="cart-item">
+          <div class="ci-icon">${p.icon}</div>
+          <div class="ci-info">
+            <div class="ci-name">${p.name}</div>
+            <div class="ci-code">${p.code}</div>
+          </div>
+          <div class="ci-price">$${p.usd.toFixed(2)}</div>
+          <button class="remove-btn" onclick="removeItem(${p.id})"><i class="ti ti-x"></i></button>
+        </div>`).join('')}
+      <div class="cart-total">
+        <span class="total-label">Total Amount</span>
+        <span class="total-val">$${totalUSD().toFixed(2)} USD</span>
+      </div>
+      <p class="step-label">Select cryptocurrency</p>
+      <div class="crypto-options">
+        ${['USDT','BTC','ETH'].map(c => `
+          <div class="crypto-opt ${selectedCrypto===c?'selected':''}" onclick="pickCrypto('${c}')">
+            <div class="crypto-icon">${c==='USDT'?'💵':c==='BTC'?'₿':'⬡'}</div>
+            <div class="crypto-name">${c}</div>
+          </div>`).join('')}
+      </div>
+      <button class="pay-btn" onclick="goPayment()">PROCEED TO PAYMENT →</button>`;
+  }
+
+  else if (currentView === 'payment') {
+    d.innerHTML = `
+      <div class="drawer-header">
+        <div class="drawer-title">PAYMENT</div>
+        <button class="close-btn" onclick="currentView='cart';renderDrawer()">←</button>
+      </div>
+      <div class="payment-screen">
+        <p class="step-label" style="text-align:center">Send exactly this amount</p>
+        <div class="amount-due">${cryptoAmount()} ${selectedCrypto}</div>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:20px">≈ $${totalUSD().toFixed(2)} USD</p>
+        <div class="wallet-label">Send to this wallet address</div>
+        <div class="wallet-box" onclick="copyWallet()" title="Click to copy">
+          <span id="wallet-addr">${WALLETS[selectedCrypto]}</span>
+        </div>
+        <p class="copy-hint"><i class="ti ti-copy" style="font-size:12px"></i> Click address to copy</p>
+        <button class="confirm-btn" onclick="currentView='success';renderDrawer()">
+          ✓ I HAVE SENT THE PAYMENT
+        </button>
+        <span class="back-link" onclick="currentView='cart';renderDrawer()">← Back to cart</span>
+      </div>`;
+  }
+
+  else if (currentView === 'success') {
+    d.innerHTML = `
+      <div class="drawer-header">
+        <div class="drawer-title">ORDER CONFIRMED</div>
+        <button class="close-btn" onclick="fullReset()">✕</button>
+      </div>
+      <div class="success-box">
+        <div class="success-icon">🎉</div>
+        <div class="success-title">PAYMENT RECEIVED!</div>
+        <p class="success-sub">Screenshot this screen — your character details below</p>
+        <table class="detail-table">
+          ${cart.map(p=>`
+            <tr>
+              <td>${p.icon} ${p.name}</td>
+              <td>${p.code}</td>
+            </tr>`).join('')}
+          <tr>
+            <td style="color:var(--muted)">Total Paid</td>
+            <td style="color:var(--gold);font-family:'Orbitron',monospace">${cryptoAmount()} ${selectedCrypto}</td>
+          </tr>
+        </table>
+      </div>
+      <button class="reset-btn" onclick="fullReset()">Close & Continue Shopping</button>`;
+  }
+}
+
+function removeItem(id) { cart = cart.filter(c=>c.id!==id); updateCount(); renderDrawer(); }
+function pickCrypto(c) { selectedCrypto=c; renderDrawer(); }
+function goPayment() { if(cart.length>0){ currentView='payment'; renderDrawer(); } }
+function fullReset() { cart=[]; updateCount(); renderGrid(); closeCart(); currentView='cart'; }
+
+document.getElementById('cart-overlay').addEventListener('click', function(e){ if(e.target===this) closeCart(); });
+
+// ---- INIT ----
+renderGrid();
+</script>
+</body>
+</html>
