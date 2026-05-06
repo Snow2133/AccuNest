@@ -7,7 +7,7 @@
 <!-- ============================================================
   EDIT HERE #1 — SITE TITLE (browser tab mein dikhta hai)
   ============================================================ -->
-<title>CharVault — Premium Character Marketplace</title>
+<title>CharVault — Premium Accounts Marketplace</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
@@ -170,8 +170,8 @@ h1,h2,h3,.price,.tag,.logo,.card-name{font-family:'Orbitron',monospace}
   <!-- ============================================================
     EDIT HERE #3 — HERO HEADING & SUBTITLE
     ============================================================ -->
-  <h1>PREMIUM <span class="glow">CHARACTERS</span></h1>
-  <p>Exclusive character names with unique usercodes. Verified & rare — yours forever.</p>
+  <h1>PREMIUM <span class="glow">ACCOUNTS</span></h1>
+  <p>Exclusive accounts with high quality. Verified & rare — yours forever.</p>
   <div class="hero-badge">
     <i class="ti ti-shield-check" style="font-size:14px"></i>
     Crypto payments · Instant delivery
@@ -182,14 +182,11 @@ h1,h2,h3,.price,.tag,.logo,.card-name{font-family:'Orbitron',monospace}
 <div class="filters">
   <!-- ============================================================
     EDIT HERE #4 — FILTER BUTTONS
-    Category values: "all", "fps", "moba", "battle", "rpg"
-    (game field in products array ke saath match karna chahiye)
+    Category values: "all", "Reddit Accounts"
+    (cqs field in products array ke saath match karna chahiye)
     ============================================================ -->
   <button class="filter-btn active" onclick="filterBy('all',this)">All</button>
-  <button class="filter-btn" onclick="filterBy('fps',this)">FPS</button>
-  <button class="filter-btn" onclick="filterBy('moba',this)">MOBA</button>
-  <button class="filter-btn" onclick="filterBy('battle',this)">Battle Royale</button>
-  <button class="filter-btn" onclick="filterBy('rpg',this)">RPG</button>
+  <button class="filter-btn" onclick="filterBy('Reddit Accounts',this)">Reddit Accounts</button>
 </div>
 
 <!-- PRODUCT GRID — auto generated from JS -->
@@ -200,7 +197,7 @@ h1,h2,h3,.price,.tag,.logo,.card-name{font-family:'Orbitron',monospace}
   <!-- ============================================================
     EDIT HERE #5 — FOOTER TEXT
     ============================================================ -->
-  <p>© 2025 <span>CharVault</span> · All characters are verified originals · Pay with crypto only</p>
+  <p>© 2025 <span>CharVault</span> · All accounts are verified originals · Pay with crypto only</p>
 </div>
 
 <!-- CART OVERLAY -->
@@ -221,40 +218,44 @@ h1,h2,h3,.price,.tag,.logo,.card-name{font-family:'Orbitron',monospace}
 //    rarity:   "legendary" | "epic" | "rare" | "common"
 //    tags:     ["Tag1","Tag2"]     (max 3 recommended)
 //    usd:      price in USD        (e.g. 2.50)
-//    game:     "fps"|"moba"|"battle"|"rpg"   (filter ke liye)
+//    cqs:      category for filtering (e.g. "fps", "moba", "battle", "rpg")
 //    sold:     false               (bechne ke baad true kar do)
 //  }
 // ================================================================
 const PRODUCTS = [
-  {id:1, icon:"⚡", name:"SHADOWBYTE",  code:"#SB2047", rarity:"legendary", tags:["FPS","Premium"],       usd:4.20,  game:"fps",    sold:false},
-  {id:2, icon:"🔥", name:"VOIDPULSE",   code:"#VP9931", rarity:"epic",      tags:["Battle Royale"],       usd:2.80,  game:"battle", sold:false},
-  {id:3, icon:"🌀", name:"NEONRIFT",    code:"#NR5510", rarity:"rare",      tags:["MOBA","Unique"],       usd:2.10,  game:"moba",   sold:false},
-  {id:4, icon:"💀", name:"DEATHMARK",   code:"#DM0001", rarity:"legendary", tags:["FPS","Rare"],          usd:5.25,  game:"fps",    sold:false},
-  {id:5, icon:"🌩️",name:"STORMCALL",   code:"#SC7772", rarity:"epic",      tags:["Battle Royale"],       usd:3.15,  game:"battle", sold:false},
-  {id:6, icon:"🎯", name:"HEXSHOT",     code:"#HS3301", rarity:"rare",      tags:["FPS"],                 usd:1.75,  game:"fps",    sold:false},
-  {id:7, icon:"🧊", name:"FROSTCLAW",   code:"#FC8820", rarity:"rare",      tags:["MOBA"],                usd:1.40,  game:"moba",   sold:false},
-  {id:8, icon:"🌑", name:"DARKMELD",    code:"#DM5599", rarity:"common",    tags:["Any Game"],            usd:0.70,  game:"rpg",    sold:false},
+  {id:1, icon:"⚡", name:"SHADOWBYTE",  code:"#SB2047", rarity:"legendary", tags:["FPS","Premium"],       usd:4.20,  cqs:"High",    sold:false},
+  {id:2, icon:"🔥", name:"VOIDPULSE",   code:"#VP9931", rarity:"epic",      tags:["Battle Royale"],       usd:2.80,  cqs:"Moderate+", sold:false},
+  {id:3, icon:"🌀", name:"NEONRIFT",    code:"#NR5510", rarity:"rare",      tags:["MOBA","Unique"],       usd:2.10,  cqs:"Low",   sold:false},
+  {id:8, icon:"🌑", name:"DARKMELD",    code:"#DM5599", rarity:"common",    tags:["Any Game"],            usd:0.70,  cqs:"On Luck",    sold:false},
 ];
 
-// ================================================================
-//  EDIT HERE #7 — CRYPTO WALLET ADDRESSES
-//  Apne real wallet addresses yahan daalo
-// ================================================================
+// #7 — CRYPTO WALLET ADDRESSES
 const WALLETS = {
-  USDT: "TXyz_APNA_USDT_WALLET_ADDRESS_YAHAN",
-  BTC:  "bc1q_APNA_BTC_WALLET_ADDRESS_YAHAN",
-  ETH:  "0x_APNA_ETH_WALLET_ADDRESS_YAHAN",
+  USDT: "0xcc7d6021ce696c32e8aa1d402c7fe93c928bdf94",
+  USDC: "0xcc7d6021ce696c32e8aa1d402c7fe93c928bdf94",
+  BTC:  "0xcc7d6021ce696c32e8aa1d402c7fe93c928bdf94",
 };
 
 // ================================================================
-//  EDIT HERE #8 — CRYPTO CONVERSION RATES (approx)
-//  Kabhi kabhi update kar lena
+//  #8 — CRYPTO CONVERSION RATES (API)
 // ================================================================
 const RATES = {
-  USDT: 1,        // 1 USDT = $1
-  BTC:  67000,    // 1 BTC = $67,000
-  ETH:  3200,     // 1 ETH = $3,200
+  USDT: 1,
+  USDC: 1,
+  BTC:  67000,
 };
+
+async function fetchLiveRates() {
+  try {
+    const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd');
+    const data = await res.json();
+    if (data.bitcoin) {
+      RATES.BTC = data.bitcoin.usd;
+    }
+  } catch (e) {
+    console.log('Rate fetch failed, using default');
+  }
+}
 
 // ---- STATE ----
 let cart = [];
@@ -319,7 +320,7 @@ function totalUSD() {
 
 function cryptoAmount() {
   return (totalUSD() / RATES[selectedCrypto]).toFixed(
-    selectedCrypto === 'USDT' ? 2 : selectedCrypto === 'BTC' ? 6 : 5
+    selectedCrypto === 'USDT' ? 2 : selectedCrypto === 'USDC' ? 2 : selectedCrypto === 'BTC' ? 6 : 5
   );
 }
 
@@ -380,9 +381,9 @@ function renderDrawer() {
       </div>
       <p class="step-label">Select cryptocurrency</p>
       <div class="crypto-options">
-        ${['USDT','BTC','ETH'].map(c => `
+        ${['USDT','USDC','BTC'].map(c => `
           <div class="crypto-opt ${selectedCrypto===c?'selected':''}" onclick="pickCrypto('${c}')">
-            <div class="crypto-icon">${c==='USDT'?'💵':c==='BTC'?'₿':'⬡'}</div>
+            <div class="crypto-icon">${c==='USDT'?'💵':c==='USDC'?'🔵':'₿'}</div>
             <div class="crypto-name">${c}</div>
           </div>`).join('')}
       </div>
@@ -398,8 +399,15 @@ function renderDrawer() {
       <div class="payment-screen">
         <p class="step-label" style="text-align:center">Send exactly this amount</p>
         <div class="amount-due">${cryptoAmount()} ${selectedCrypto}</div>
-        <p style="font-size:12px;color:var(--muted);margin-bottom:20px">≈ $${totalUSD().toFixed(2)} USD</p>
-        <div class="wallet-label">Send to this wallet address</div>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:16px">≈ $${totalUSD().toFixed(2)} USD</p>
+        <div style="display:flex;justify-content:center;margin-bottom:10px">
+          <img
+            src="${selectedCrypto === 'USDT' ? 'qr-usdt.png' : selectedCrypto === 'USDC' ? 'qr-usdc.png' : 'qr-btc.png'}"
+            style="width:160px;height:160px;border-radius:10px;background:#fff;padding:8px"
+          />
+        </div>
+        <p style="font-size:11px;color:var(--muted);text-align:center;margin-bottom:14px">📷 Phone se scan karo</p>
+        <div class="wallet-label">Ya manually copy karo</div>
         <div class="wallet-box" onclick="copyWallet()" title="Click to copy">
           <span id="wallet-addr">${WALLETS[selectedCrypto]}</span>
         </div>
@@ -439,8 +447,13 @@ function renderDrawer() {
 
 function removeItem(id) { cart = cart.filter(c=>c.id!==id); updateCount(); renderDrawer(); }
 function pickCrypto(c) { selectedCrypto=c; renderDrawer(); }
-function goPayment() { if(cart.length>0){ currentView='payment'; renderDrawer(); } }
-function fullReset() { cart=[]; updateCount(); renderGrid(); closeCart(); currentView='cart'; }
+async function goPayment() {
+  if(cart.length>0){
+    await fetchLiveRates();
+    currentView='payment';
+    renderDrawer();
+  }
+}function fullReset() { cart=[]; updateCount(); renderGrid(); closeCart(); currentView='cart'; }
 
 document.getElementById('cart-overlay').addEventListener('click', function(e){ if(e.target===this) closeCart(); });
 
