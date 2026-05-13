@@ -3,368 +3,475 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<!-- EDIT: Site title -->
-<title>KarmaKings — Premium Reddit Accounts</title>
+<title>AccuNest — Premium Reddit Accounts</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#0c0c0e;
-  --surface:#141416;
-  --card:#1a1a1e;
-  --card2:#1f1f25;
-  --border:#2a2a35;
-  --border2:#333340;
-  --accent:#ff4500;
-  --accent2:#ff6534;
-  --gold:#fbbf24;
-  --green:#22c55e;
-  --blue:#3b82f6;
-  --text:#f0f0f5;
-  --muted:#7070a0;
-  --muted2:#9090b0;
-  --radius:12px;
+  --bg:#fafaf8;
+  --surface:#ffffff;
+  --card:#f4f3ef;
+  --border:#e8e6df;
+  --border2:#d4d0c8;
+  --accent:#e8380d;
+  --accent-dark:#c42d09;
+  --accent-light:#fff1ee;
+  --text:#1a1a18;
+  --muted:#6b6b5e;
+  --muted2:#9a9a8a;
+  --green:#16a34a;
+  --gold:#d97706;
+  --r:14px;
 }
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'Instrument Sans',sans-serif;min-height:100vh;overflow-x:hidden}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden}
 
-/* NOISE TEXTURE */
-body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.4}
-
-/* NAV */
-nav{position:sticky;top:0;z-index:100;background:rgba(12,12,14,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:64px}
-.logo{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;letter-spacing:-0.5px;color:var(--text)}
-.logo span{color:var(--accent)}
-.nav-links{display:flex;align-items:center;gap:32px}
-.nav-links a{color:var(--muted2);font-size:14px;font-weight:500;text-decoration:none;transition:color .2s;cursor:pointer}
+/* ── NAV ── */
+nav{background:rgba(250,250,248,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:200;padding:0 5vw;display:flex;align-items:center;justify-content:space-between;height:62px}
+.logo{font-family:'Bricolage Grotesque',sans-serif;font-size:20px;font-weight:800;color:var(--text);letter-spacing:-.5px;text-decoration:none}
+.logo em{color:var(--accent);font-style:normal}
+.nav-links{display:flex;gap:28px}
+.nav-links a{font-size:14px;font-weight:500;color:var(--muted);text-decoration:none;cursor:pointer;transition:color .2s}
 .nav-links a:hover{color:var(--text)}
-.nav-right{display:flex;align-items:center;gap:12px}
-.cart-btn{background:var(--accent);color:#fff;border:none;padding:9px 20px;border-radius:8px;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:8px;letter-spacing:.3px;transition:background .2s}
-.cart-btn:hover{background:var(--accent2)}
-.cart-count{background:rgba(255,255,255,0.25);border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
+.nav-cta{background:var(--accent);color:#fff;border:none;padding:9px 22px;border-radius:8px;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:13px;cursor:pointer;transition:background .2s;letter-spacing:.2px}
+.nav-cta:hover{background:var(--accent-dark)}
 
-/* HERO */
-.hero{position:relative;padding:90px 40px 70px;text-align:center;overflow:hidden}
-.hero-glow{position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:700px;height:400px;background:radial-gradient(ellipse,rgba(255,69,0,0.12) 0%,transparent 70%);pointer-events:none}
-.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(255,69,0,0.1);border:1px solid rgba(255,69,0,0.25);color:var(--accent2);font-size:12px;font-weight:600;padding:6px 16px;border-radius:100px;letter-spacing:.5px;margin-bottom:24px}
-.hero-tag span{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.5)}}
-.hero h1{font-family:'Syne',sans-serif;font-size:clamp(36px,6vw,72px);font-weight:800;line-height:1.05;letter-spacing:-2px;margin-bottom:20px}
+/* ── HERO ── */
+.hero{padding:80px 5vw 70px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;max-width:1200px;margin:0 auto}
+.hero-left{}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--accent-light);color:var(--accent);font-size:12px;font-weight:600;padding:5px 14px;border-radius:100px;margin-bottom:22px;border:1px solid rgba(232,56,13,0.15)}
+.hero-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(34px,4.5vw,58px);font-weight:800;line-height:1.08;letter-spacing:-2px;margin-bottom:20px;color:var(--text)}
 .hero h1 em{color:var(--accent);font-style:normal}
-.hero p{color:var(--muted2);font-size:17px;max-width:560px;margin:0 auto 36px;line-height:1.7}
-.hero-actions{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
-.btn-primary{background:var(--accent);color:#fff;border:none;padding:14px 32px;border-radius:10px;font-family:'Syne',sans-serif;font-weight:700;font-size:15px;cursor:pointer;letter-spacing:.3px;transition:all .2s}
-.btn-primary:hover{background:var(--accent2);transform:translateY(-1px)}
-.btn-ghost{background:transparent;color:var(--text);border:1px solid var(--border2);padding:14px 32px;border-radius:10px;font-family:'Syne',sans-serif;font-weight:600;font-size:15px;cursor:pointer;transition:all .2s}
-.btn-ghost:hover{border-color:var(--muted2)}
+.hero-sub{font-size:16px;color:var(--muted);line-height:1.75;margin-bottom:32px;max-width:480px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+.btn-red{background:var(--accent);color:#fff;border:none;padding:14px 30px;border-radius:10px;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:15px;cursor:pointer;transition:all .2s;letter-spacing:.2px}
+.btn-red:hover{background:var(--accent-dark);transform:translateY(-1px);box-shadow:0 8px 24px rgba(232,56,13,.25)}
+.btn-outline{background:transparent;color:var(--text);border:1.5px solid var(--border2);padding:14px 30px;border-radius:10px;font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:15px;cursor:pointer;transition:all .2s}
+.btn-outline:hover{border-color:var(--text)}
 
-/* TRUST BAR */
-.trust-bar{border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:18px 40px;display:flex;align-items:center;justify-content:center;gap:48px;flex-wrap:wrap;background:var(--surface)}
-.trust-item{display:flex;align-items:center;gap:10px;color:var(--muted2);font-size:13px;font-weight:500}
-.trust-icon{font-size:18px}
-.trust-item strong{color:var(--text)}
+.hero-right{position:relative}
+.hero-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:28px;box-shadow:0 20px 60px rgba(0,0,0,.08)}
+.hc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.hc-badge{background:var(--accent-light);color:var(--accent);font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;border:1px solid rgba(232,56,13,.15)}
+.hc-live{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--green);font-weight:600}
+.hc-live span{width:7px;height:7px;border-radius:50%;background:var(--green);animation:blink 1.5s infinite}
+.hc-title{font-family:'Bricolage Grotesque',sans-serif;font-size:20px;font-weight:800;margin-bottom:6px;letter-spacing:-.3px}
+.hc-desc{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:20px}
+.hc-specs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:20px}
+.hc-spec{background:var(--card);border-radius:10px;padding:12px;text-align:center}
+.hc-spec-val{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;font-weight:700;color:var(--text)}
+.hc-spec-lbl{font-size:10px;color:var(--muted2);margin-top:3px;letter-spacing:.5px;text-transform:uppercase}
+.hc-price-row{display:flex;align-items:center;justify-content:space-between}
+.hc-price{font-family:'Bricolage Grotesque',sans-serif;font-size:28px;font-weight:800;color:var(--text)}
+.hc-price small{font-size:13px;font-weight:400;color:var(--muted);margin-left:2px}
+.buy-btn{background:var(--accent);color:#fff;border:none;padding:12px 26px;border-radius:10px;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:14px;cursor:pointer;transition:all .2s}
+.buy-btn:hover{background:var(--accent-dark)}
 
-/* SHOP SECTION */
-.shop{padding:60px 40px}
-.section-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:32px;gap:16px;flex-wrap:wrap}
-.section-title{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;letter-spacing:-1px}
-.section-sub{color:var(--muted);font-size:14px;margin-top:6px}
+/* floating stat pills */
+.hero-stat{position:absolute;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:10px 16px;box-shadow:0 8px 24px rgba(0,0,0,.08);display:flex;align-items:center;gap:10px}
+.hs1{top:-20px;left:-30px}
+.hs2{bottom:-20px;right:-20px}
+.hs-icon{font-size:20px}
+.hs-val{font-family:'Bricolage Grotesque',sans-serif;font-size:14px;font-weight:800}
+.hs-lbl{font-size:11px;color:var(--muted)}
 
-/* FILTERS */
-.filters{display:flex;gap:8px;flex-wrap:wrap}
-.filter-pill{background:transparent;border:1px solid var(--border);color:var(--muted2);padding:7px 18px;border-radius:100px;font-size:13px;font-weight:500;cursor:pointer;transition:all .2s}
-.filter-pill.active,.filter-pill:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+/* ── TRUST TICKER ── */
+.ticker{background:var(--accent);padding:12px 0;overflow:hidden;white-space:nowrap}
+.ticker-inner{display:inline-flex;gap:48px;animation:ticker 20s linear infinite}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.ticker-item{font-family:'Bricolage Grotesque',sans-serif;font-size:13px;font-weight:700;color:#fff;letter-spacing:.5px;display:inline-flex;align-items:center;gap:10px}
+.ticker-dot{width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.5)}
 
-/* PRODUCT GRID */
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+/* ── STATS ── */
+.stats{padding:64px 5vw;border-bottom:1px solid var(--border)}
+.stats-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);border-radius:var(--r);overflow:hidden}
+.stat-box{background:var(--surface);padding:36px 24px;text-align:center}
+.stat-num{font-family:'Bricolage Grotesque',sans-serif;font-size:42px;font-weight:800;color:var(--accent);letter-spacing:-2px}
+.stat-lbl{font-size:13px;color:var(--muted);margin-top:6px;font-weight:500}
 
-/* PRODUCT CARD */
-.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:22px;position:relative;transition:all .25s;cursor:pointer}
-.card:hover{border-color:var(--border2);background:var(--card2);transform:translateY(-2px);box-shadow:0 16px 48px rgba(0,0,0,0.4)}
-.card-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px}
-.card-badge{font-size:10px;font-family:'Syne',sans-serif;font-weight:700;letter-spacing:.8px;padding:4px 10px;border-radius:6px}
-.badge-legendary{background:rgba(251,191,36,0.15);color:var(--gold);border:1px solid rgba(251,191,36,0.3)}
-.badge-high{background:rgba(255,69,0,0.15);color:var(--accent2);border:1px solid rgba(255,69,0,0.3)}
-.badge-medium{background:rgba(59,130,246,0.15);color:var(--blue);border:1px solid rgba(59,130,246,0.3)}
-.badge-standard{background:rgba(112,112,160,0.15);color:var(--muted2);border:1px solid var(--border)}
-.card-stock{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:5px}
-.stock-dot{width:6px;height:6px;border-radius:50%;background:var(--green)}
-.stock-dot.low{background:var(--gold)}
-.stock-dot.out{background:#ef4444}
+/* ── WHY SECTION ── */
+.why{padding:80px 5vw;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.why-left .sec-eyebrow{display:inline-block;font-size:12px;font-weight:700;color:var(--accent);letter-spacing:1px;text-transform:uppercase;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid var(--accent)}
+.why-left h2{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(28px,3.5vw,44px);font-weight:800;letter-spacing:-1.5px;line-height:1.1;margin-bottom:16px}
+.why-left p{font-size:15px;color:var(--muted);line-height:1.8;margin-bottom:24px}
+.guarantee-pill{display:inline-flex;align-items:center;gap:10px;background:var(--accent-light);border:1px solid rgba(232,56,13,.2);border-radius:10px;padding:14px 18px;font-size:13px;line-height:1.5}
+.gp-icon{font-size:20px}
+.gp-text strong{color:var(--accent);display:block;font-size:13px;font-weight:700}
+.gp-text span{color:var(--muted);font-size:12px}
+.why-right{display:flex;flex-direction:column;gap:2px;background:var(--border);border-radius:var(--r);overflow:hidden}
+.why-feat{background:var(--surface);padding:18px 22px;display:flex;align-items:center;gap:14px;transition:background .2s}
+.why-feat:hover{background:var(--card)}
+.wf-icon{width:38px;height:38px;border-radius:9px;background:var(--accent-light);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.wf-title{font-size:14px;font-weight:600;color:var(--text)}
+.wf-desc{font-size:12px;color:var(--muted);margin-top:2px}
 
-.card-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;letter-spacing:-.5px;margin-bottom:6px}
-.card-desc{color:var(--muted2);font-size:13px;line-height:1.6;margin-bottom:16px}
+/* ── HOW IT WORKS ── */
+.how{background:var(--card);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:80px 5vw}
+.how-inner{max-width:900px;margin:0 auto}
+.sec-header{text-align:center;margin-bottom:52px}
+.sec-eyebrow{display:inline-block;font-size:12px;font-weight:700;color:var(--accent);letter-spacing:1px;text-transform:uppercase;margin-bottom:14px;padding-bottom:8px;border-bottom:2px solid var(--accent)}
+.sec-title{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(26px,3.5vw,40px);font-weight:800;letter-spacing:-1.5px;margin-bottom:10px}
+.sec-sub{font-size:15px;color:var(--muted)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative}
+.steps::before{content:'';position:absolute;top:28px;left:10%;right:10%;height:1px;background:var(--border2)}
+.step{text-align:center;padding:0 12px;position:relative}
+.step-num{width:56px;height:56px;border-radius:50%;background:var(--surface);border:1.5px solid var(--border2);display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;font-size:18px;font-weight:800;color:var(--accent);margin:0 auto 18px;position:relative;z-index:1}
+.step-title{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;font-weight:700;margin-bottom:8px}
+.step-desc{font-size:12px;color:var(--muted);line-height:1.6}
 
-.card-specs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:18px}
-.spec{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:10px 12px}
-.spec-label{font-size:10px;color:var(--muted);letter-spacing:.8px;text-transform:uppercase;margin-bottom:4px}
-.spec-val{font-size:13px;font-weight:600;color:var(--text)}
+/* ── PRODUCT SECTION ── */
+.product-sec{padding:80px 5vw;max-width:1200px;margin:0 auto}
+.prod-card{background:var(--surface);border:1.5px solid var(--border);border-radius:20px;overflow:hidden;max-width:680px;margin:0 auto;box-shadow:0 4px 32px rgba(0,0,0,.06)}
+.prod-top{padding:32px;border-bottom:1px solid var(--border)}
+.prod-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px}
+.prod-badge{background:var(--accent);color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:6px;letter-spacing:.5px}
+.prod-stock{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--green);font-weight:500}
+.prod-stock-dot{width:7px;height:7px;border-radius:50%;background:var(--green)}
+.prod-title{font-family:'Bricolage Grotesque',sans-serif;font-size:26px;font-weight:800;letter-spacing:-.5px;margin-bottom:10px}
+.prod-desc{font-size:14px;color:var(--muted);line-height:1.75;margin-bottom:20px}
+.prod-tags{display:flex;gap:8px;flex-wrap:wrap}
+.prod-tag{background:var(--card);border:1px solid var(--border);color:var(--muted);font-size:12px;padding:4px 12px;border-radius:6px;font-weight:500}
+.prod-bottom{padding:24px 32px;background:var(--card)}
+.prod-buy-row{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.prod-price-block .prod-price{font-family:'Bricolage Grotesque',sans-serif;font-size:36px;font-weight:800;letter-spacing:-1px;color:var(--text)}
+.prod-price-block .prod-price-sub{font-size:12px;color:var(--muted);margin-top:2px}
+.qty-wrap{display:flex;align-items:center;gap:12px}
+.qty-lbl{font-size:12px;color:var(--muted);font-weight:500}
+.qty-ctrl{display:flex;align-items:center;border:1.5px solid var(--border2);border-radius:9px;overflow:hidden}
+.qty-btn{background:transparent;border:none;width:36px;height:36px;font-size:18px;cursor:pointer;color:var(--muted);transition:all .15s;display:flex;align-items:center;justify-content:center}
+.qty-btn:hover{background:var(--card);color:var(--text)}
+.qty-num{min-width:36px;text-align:center;font-family:'Bricolage Grotesque',sans-serif;font-size:15px;font-weight:700}
+.add-cart-btn{background:var(--accent);color:#fff;border:none;padding:13px 28px;border-radius:10px;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:15px;cursor:pointer;transition:all .2s;white-space:nowrap}
+.add-cart-btn:hover{background:var(--accent-dark);transform:translateY(-1px)}
+.add-cart-btn.added{background:var(--green)}
+.prod-note{margin-top:14px;font-size:12px;color:var(--muted);display:flex;align-items:center;gap:6px}
 
-.card-footer{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.card-price{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--text)}
-.card-price small{font-size:13px;color:var(--muted);font-weight:400;font-family:'Instrument Sans',sans-serif;margin-left:2px}
+/* ── TESTIMONIALS ── */
+.reviews{padding:80px 5vw;border-top:1px solid var(--border)}
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:1100px;margin:48px auto 0}
+.review-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:22px}
+.review-stars{color:var(--gold);font-size:14px;margin-bottom:10px}
+.review-text{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:14px;font-style:italic}
+.review-author{font-size:13px;font-weight:600;color:var(--text)}
+.review-handle{font-size:12px;color:var(--muted2)}
 
-.qty-control{display:flex;align-items:center;gap:0;border:1px solid var(--border);border-radius:8px;overflow:hidden}
-.qty-btn{background:transparent;border:none;color:var(--muted2);width:32px;height:32px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all .15s}
-.qty-btn:hover{background:rgba(255,255,255,0.05);color:var(--text)}
-.qty-val{min-width:32px;text-align:center;font-size:13px;font-weight:600;padding:0 4px}
+/* ── FAQ ── */
+.faq{background:var(--card);border-top:1px solid var(--border);padding:80px 5vw}
+.faq-inner{max-width:700px;margin:48px auto 0}
+.faq-item{background:var(--surface);border:1px solid var(--border);border-radius:10px;margin-bottom:8px;overflow:hidden}
+.faq-q{padding:18px 20px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:14px;font-weight:600;gap:12px;transition:color .2s}
+.faq-q:hover{color:var(--accent)}
+.faq-icon{color:var(--muted);font-size:20px;transition:transform .25s;flex-shrink:0}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.faq-a-inner{padding:0 20px 16px;font-size:13px;color:var(--muted);line-height:1.75}
+.faq-item.open .faq-icon{transform:rotate(45deg);color:var(--accent)}
+.faq-item.open .faq-a{max-height:300px}
 
-.add-btn{background:var(--accent);color:#fff;border:none;padding:9px 18px;border-radius:8px;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;cursor:pointer;transition:all .2s;white-space:nowrap}
-.add-btn:hover{background:var(--accent2)}
-.add-btn.added{background:var(--green);color:#fff}
-.out-btn{background:rgba(239,68,68,0.1);color:#ef4444;border:1px solid rgba(239,68,68,0.25);padding:9px 18px;border-radius:8px;font-size:13px;font-weight:600}
+/* ── FOOTER ── */
+footer{background:var(--text);color:rgba(255,255,255,.7);padding:40px 5vw;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.footer-logo{font-family:'Bricolage Grotesque',sans-serif;font-size:18px;font-weight:800;color:#fff}
+.footer-logo em{color:var(--accent);font-style:normal}
+footer p{font-size:13px}
 
-/* HOW IT WORKS */
-.how{padding:60px 40px;border-top:1px solid var(--border)}
-.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2px;margin-top:36px;background:var(--border);border-radius:var(--radius);overflow:hidden}
-.step{background:var(--surface);padding:28px 24px;position:relative}
-.step-num{font-family:'Syne',sans-serif;font-size:36px;font-weight:800;color:rgba(255,69,0,0.2);margin-bottom:12px;line-height:1}
-.step-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:8px}
-.step-desc{font-size:13px;color:var(--muted2);line-height:1.6}
-
-/* GUARANTEE */
-.guarantee{padding:0 40px 60px}
-.guarantee-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:32px}
-.g-item{display:flex;gap:16px}
-.g-icon{font-size:28px;flex-shrink:0}
-.g-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:6px}
-.g-desc{font-size:13px;color:var(--muted2);line-height:1.6}
-
-/* FAQ */
-.faq{padding:0 40px 60px}
-.faq-list{margin-top:32px;display:flex;flex-direction:column;gap:2px;border-radius:var(--radius);overflow:hidden}
-.faq-item{background:var(--surface);border:1px solid var(--border)}
-.faq-item:first-child{border-radius:var(--radius) var(--radius) 0 0}
-.faq-item:last-child{border-radius:0 0 var(--radius) var(--radius)}
-.faq-q{padding:18px 22px;font-size:14px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:color .2s}
-.faq-q:hover{color:var(--accent2)}
-.faq-q span{color:var(--muted);font-size:18px;transition:transform .25s}
-.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;font-size:13px;color:var(--muted2);line-height:1.7}
-.faq-a-inner{padding:0 22px 18px}
-.faq-item.open .faq-q span{transform:rotate(45deg);color:var(--accent)}
-.faq-item.open .faq-a{max-height:200px}
-
-/* FOOTER */
-footer{border-top:1px solid var(--border);padding:32px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:gap;gap:16px}
-.footer-logo{font-family:'Syne',sans-serif;font-size:18px;font-weight:800}
-.footer-logo span{color:var(--accent)}
-footer p{color:var(--muted);font-size:13px}
-
-/* OVERLAY */
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:999;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(8px)}
+/* ── CART OVERLAY ── */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:999;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(6px)}
 .overlay.open{display:flex}
-.drawer{background:var(--surface);border:1px solid var(--border);border-radius:16px;width:100%;max-width:440px;max-height:92vh;overflow-y:auto;display:flex;flex-direction:column}
-.drawer-head{padding:22px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:var(--surface);border-radius:16px 16px 0 0}
-.drawer-title{font-family:'Syne',sans-serif;font-size:17px;font-weight:800;letter-spacing:-.3px}
-.drawer-close{background:transparent;border:1px solid var(--border);color:var(--muted2);width:34px;height:34px;border-radius:8px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all .2s}
-.drawer-close:hover{border-color:var(--accent);color:var(--accent)}
-.drawer-body{padding:20px 24px;flex:1}
-.drawer-foot{padding:18px 24px;border-top:1px solid var(--border);position:sticky;bottom:0;background:var(--surface);border-radius:0 0 16px 16px}
+.drawer{background:var(--surface);border:1px solid var(--border);border-radius:18px;width:100%;max-width:450px;max-height:92vh;display:flex;flex-direction:column;box-shadow:0 32px 80px rgba(0,0,0,.2)}
+.d-head{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.d-title{font-family:'Bricolage Grotesque',sans-serif;font-size:17px;font-weight:800;letter-spacing:-.3px}
+.d-close{background:var(--card);border:1px solid var(--border);width:32px;height:32px;border-radius:8px;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:all .2s}
+.d-close:hover{border-color:var(--accent);color:var(--accent)}
+.d-body{padding:22px 24px;overflow-y:auto;flex:1}
+.d-foot{padding:16px 24px;border-top:1px solid var(--border);flex-shrink:0}
 
-/* CART ITEMS */
-.cart-item{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--border)}
-.ci-left{flex:1;min-width:0}
-.ci-name{font-family:'Syne',sans-serif;font-size:14px;font-weight:700}
+/* cart item */
+.ci{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--border)}
+.ci-info{flex:1}
+.ci-name{font-family:'Bricolage Grotesque',sans-serif;font-size:14px;font-weight:700}
 .ci-meta{font-size:12px;color:var(--muted);margin-top:3px}
-.ci-qty{font-size:12px;color:var(--muted2);margin-top:2px}
-.ci-price{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--text);white-space:nowrap}
-.ci-remove{background:transparent;border:none;color:var(--muted);cursor:pointer;font-size:18px;padding:4px;transition:color .2s}
-.ci-remove:hover{color:#ef4444}
+.ci-right{text-align:right}
+.ci-price{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;font-weight:700}
+.ci-qty{font-size:12px;color:var(--muted);margin-top:2px}
+.ci-remove{background:none;border:none;color:var(--muted2);font-size:17px;cursor:pointer;padding:4px;transition:color .2s}
+.ci-remove:hover{color:var(--accent)}
+.total-box{display:flex;justify-content:space-between;align-items:center;padding:14px;background:var(--accent-light);border:1px solid rgba(232,56,13,.15);border-radius:10px;margin:16px 0}
+.total-lbl{font-size:13px;color:var(--muted)}
+.total-val{font-family:'Bricolage Grotesque',sans-serif;font-size:22px;font-weight:800;color:var(--accent)}
 
-.total-row{display:flex;justify-content:space-between;align-items:center;padding:14px;background:rgba(255,69,0,0.07);border:1px solid rgba(255,69,0,0.15);border-radius:10px;margin:14px 0}
-.total-label{font-size:13px;color:var(--muted2)}
-.total-val{font-family:'Syne',sans-serif;font-size:22px;font-weight:800}
-
-/* EMAIL INPUT */
-.input-group{margin-bottom:12px}
-.input-label{font-size:12px;color:var(--muted);letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px}
-.input-field{width:100%;background:var(--card);border:1px solid var(--border);color:var(--text);padding:11px 14px;border-radius:8px;font-size:14px;font-family:'Instrument Sans',sans-serif;outline:none;transition:border-color .2s}
-.input-field:focus{border-color:var(--accent)}
-.input-field::placeholder{color:var(--muted)}
-
-/* CRYPTO */
-.crypto-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:12px 0}
-.crypto-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center;cursor:pointer;transition:all .2s}
-.crypto-card:hover,.crypto-card.sel{border-color:var(--accent);background:rgba(255,69,0,0.07)}
-.crypto-card.sel .crypto-name{color:var(--accent)}
-.crypto-em{font-size:22px;margin-bottom:4px}
-.crypto-name{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;color:var(--muted2);letter-spacing:.5px}
-
-.pay-btn{width:100%;background:var(--accent);color:#fff;border:none;padding:15px;border-radius:10px;font-family:'Syne',sans-serif;font-weight:800;font-size:15px;cursor:pointer;letter-spacing:.3px;transition:all .2s}
-.pay-btn:hover{background:var(--accent2)}
-.pay-btn:disabled{opacity:.4;cursor:not-allowed}
-
-/* PAYMENT */
-.amount-display{text-align:center;padding:20px 0 16px}
-.amount-crypto{font-family:'Syne',sans-serif;font-size:32px;font-weight:800;letter-spacing:-1px}
-.amount-usd{font-size:13px;color:var(--muted);margin-top:4px}
-.wallet-section{margin-bottom:16px}
-.wallet-label-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-.wallet-label{font-size:12px;color:var(--muted);letter-spacing:.5px;text-transform:uppercase}
-.copy-btn{font-size:12px;color:var(--accent2);cursor:pointer;background:none;border:none;font-family:'Instrument Sans',sans-serif;font-weight:600}
-.wallet-addr{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;font-family:monospace;font-size:12px;color:var(--accent2);word-break:break-all;cursor:pointer;transition:border-color .2s}
-.wallet-addr:hover{border-color:var(--accent)}
-.qr-box{display:flex;justify-content:center;margin:16px 0}
-.qr-img{width:150px;height:150px;border-radius:10px;background:#fff;padding:8px;object-fit:contain}
-.warn-box{background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.2);border-radius:8px;padding:12px 14px;font-size:12px;color:#d97706;margin-bottom:16px;line-height:1.6}
-.confirm-btn{width:100%;background:var(--green);color:#fff;border:none;padding:14px;border-radius:10px;font-family:'Syne',sans-serif;font-weight:800;font-size:14px;cursor:pointer;letter-spacing:.3px;transition:opacity .2s}
-.confirm-btn:hover{opacity:.88}
+/* email input */
+.inp-lbl{font-size:11px;color:var(--muted);letter-spacing:.8px;text-transform:uppercase;margin-bottom:7px}
+.inp{width:100%;background:var(--card);border:1.5px solid var(--border);color:var(--text);padding:11px 14px;border-radius:9px;font-size:14px;outline:none;transition:border-color .2s;font-family:'DM Sans',sans-serif;margin-bottom:14px}
+.inp:focus{border-color:var(--accent)}
+.inp::placeholder{color:var(--muted2)}
+.crypto-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:16px}
+.crypto-opt{background:var(--card);border:1.5px solid var(--border);border-radius:10px;padding:12px 8px;text-align:center;cursor:pointer;transition:all .2s}
+.crypto-opt:hover,.crypto-opt.sel{border-color:var(--accent);background:var(--accent-light)}
+.crypto-opt.sel .c-name{color:var(--accent)}
+.c-em{font-size:22px;margin-bottom:4px}
+.c-name{font-family:'Bricolage Grotesque',sans-serif;font-size:11px;font-weight:700;color:var(--muted)}
+.big-btn{width:100%;background:var(--accent);color:#fff;border:none;padding:15px;border-radius:10px;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:15px;cursor:pointer;transition:all .2s;letter-spacing:.2px}
+.big-btn:hover{background:var(--accent-dark)}
+.big-btn:disabled{opacity:.4;cursor:not-allowed}
+.big-btn-green{background:var(--green)}
+.big-btn-green:hover{background:#15803d}
 .back-link{display:block;text-align:center;color:var(--muted);font-size:13px;cursor:pointer;margin-top:12px;transition:color .2s}
 .back-link:hover{color:var(--text)}
 
-/* SUCCESS */
-.success-top{text-align:center;padding:10px 0 24px}
-.success-emoji{font-size:56px;margin-bottom:12px}
-.success-title{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;letter-spacing:-.5px;margin-bottom:6px}
-.success-sub{color:var(--muted2);font-size:13px;line-height:1.6}
-.delivery-box{background:rgba(34,197,94,0.07);border:1px solid rgba(34,197,94,0.2);border-radius:12px;padding:18px}
-.delivery-title{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--green);margin-bottom:14px;letter-spacing:.3px;text-transform:uppercase}
-.detail-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:13px}
-.detail-row:last-child{border:none}
-.detail-key{color:var(--muted2)}
-.detail-val{font-family:monospace;color:var(--text);font-size:12px;word-break:break-all;text-align:right;max-width:200px}
-.email-note{font-size:12px;color:var(--muted);text-align:center;margin-top:12px}
-.done-btn{width:100%;background:transparent;border:1px solid var(--border);color:var(--muted2);padding:12px;border-radius:10px;cursor:pointer;font-size:14px;font-family:'Syne',sans-serif;font-weight:700;transition:all .2s;margin-top:14px}
+/* payment */
+.amt-display{text-align:center;padding:16px 0}
+.amt-big{font-family:'Bricolage Grotesque',sans-serif;font-size:32px;font-weight:800;letter-spacing:-1px}
+.amt-usd{font-size:13px;color:var(--muted);margin-top:4px}
+.wallet-lbl-row{display:flex;justify-content:space-between;margin-bottom:8px}
+.wallet-lbl{font-size:11px;color:var(--muted);letter-spacing:.8px;text-transform:uppercase}
+.copy-btn{background:none;border:none;color:var(--accent);font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600}
+.wallet-box{background:var(--card);border:1.5px solid var(--border);border-radius:10px;padding:14px;font-family:monospace;font-size:12px;color:var(--accent);word-break:break-all;cursor:pointer;transition:border-color .2s;margin-bottom:6px}
+.wallet-box:hover{border-color:var(--accent)}
+.qr-box{display:flex;justify-content:center;margin:16px 0}
+.qr-img{width:148px;height:148px;border-radius:10px;padding:8px;background:#fff;box-shadow:0 4px 16px rgba(0,0,0,.1)}
+.warn{background:#fffbeb;border:1px solid #fcd34d;border-radius:8px;padding:12px 14px;font-size:12px;color:#92400e;line-height:1.6;margin-bottom:14px}
+
+/* success */
+.success-top{text-align:center;padding:8px 0 24px}
+.s-em{font-size:52px;margin-bottom:12px}
+.s-title{font-family:'Bricolage Grotesque',sans-serif;font-size:22px;font-weight:800;letter-spacing:-.5px;margin-bottom:6px}
+.s-sub{font-size:13px;color:var(--muted);line-height:1.6}
+.delivery-box{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:18px}
+.del-title{font-size:11px;font-weight:700;color:var(--green);letter-spacing:1px;text-transform:uppercase;margin-bottom:14px}
+.del-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #dcfce7;font-size:13px}
+.del-row:last-child{border:none}
+.del-k{color:var(--muted)}
+.del-v{font-family:monospace;font-size:12px;color:var(--text);text-align:right;max-width:200px}
+.email-note{font-size:12px;color:var(--muted2);text-align:center;margin-top:12px}
+.done-btn{width:100%;background:transparent;border:1.5px solid var(--border2);color:var(--muted);padding:12px;border-radius:10px;cursor:pointer;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:14px;margin-top:14px;transition:all .2s}
 .done-btn:hover{border-color:var(--text);color:var(--text)}
-.empty-cart{text-align:center;padding:48px 20px;color:var(--muted)}
-.empty-em{font-size:48px;margin-bottom:14px;opacity:.3}
 .step-lbl{font-size:11px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px}
+.empty-cart{text-align:center;padding:48px 20px;color:var(--muted2)}
+.empty-em{font-size:44px;margin-bottom:12px;opacity:.3}
+
+/* ── ADMIN PANEL ── */
+#admin-panel{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:9999;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(8px)}
+#admin-panel.open{display:flex}
+.admin-box{background:#fff;border-radius:16px;width:100%;max-width:560px;max-height:90vh;overflow-y:auto}
+.admin-head{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--text);border-radius:16px 16px 0 0}
+.admin-title{font-family:'Bricolage Grotesque',sans-serif;font-size:16px;font-weight:800;color:#fff;letter-spacing:-.3px}
+.admin-close{background:rgba(255,255,255,.1);border:none;color:#fff;width:32px;height:32px;border-radius:8px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center}
+.admin-body{padding:24px}
+.admin-sec{margin-bottom:28px;padding-bottom:24px;border-bottom:1px solid var(--border)}
+.admin-sec:last-child{border:none;margin-bottom:0;padding-bottom:0}
+.admin-sec-title{font-family:'Bricolage Grotesque',sans-serif;font-size:14px;font-weight:800;color:var(--text);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.admin-sec-icon{font-size:16px}
+.adm-row{margin-bottom:12px}
+.adm-lbl{font-size:11px;color:var(--muted);letter-spacing:.7px;text-transform:uppercase;margin-bottom:5px;font-weight:600}
+.adm-inp{width:100%;background:var(--bg);border:1.5px solid var(--border);color:var(--text);padding:10px 13px;border-radius:8px;font-size:13px;outline:none;font-family:'DM Sans',sans-serif;transition:border-color .2s}
+.adm-inp:focus{border-color:var(--accent)}
+.adm-inp[type=number]{-moz-appearance:textfield}
+.adm-textarea{width:100%;background:var(--bg);border:1.5px solid var(--border);color:var(--text);padding:10px 13px;border-radius:8px;font-size:13px;outline:none;font-family:'DM Sans',sans-serif;resize:vertical;min-height:70px;transition:border-color .2s}
+.adm-textarea:focus{border-color:var(--accent)}
+.adm-2col{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.adm-save-btn{background:var(--accent);color:#fff;border:none;padding:11px 22px;border-radius:8px;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:13px;cursor:pointer;transition:background .2s}
+.adm-save-btn:hover{background:var(--accent-dark)}
+.adm-toggle{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.adm-toggle input[type=checkbox]{width:16px;height:16px;accent-color:var(--accent);cursor:pointer}
+.adm-toggle label{font-size:13px;color:var(--text);cursor:pointer;font-weight:500}
+.stock-count{display:inline-block;background:var(--accent-light);color:var(--accent);font-size:12px;font-weight:700;padding:3px 10px;border-radius:6px;margin-left:8px}
 </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
-  <!-- EDIT: Logo name -->
-  <div class="logo">Karma<span>Kings</span></div>
+  <a class="logo" href="#">Accu<em>Nest</em></a>
   <div class="nav-links">
-    <a onclick="document.querySelector('.shop').scrollIntoView({behavior:'smooth'})">Shop</a>
-    <a onclick="document.querySelector('.how').scrollIntoView({behavior:'smooth'})">How It Works</a>
-    <a onclick="document.querySelector('.faq').scrollIntoView({behavior:'smooth'})">FAQ</a>
+    <a onclick="scroll2('product-sec')">Shop</a>
+    <a onclick="scroll2('how')">How It Works</a>
+    <a onclick="scroll2('faq')">FAQ</a>
   </div>
-  <div class="nav-right">
-    <button class="cart-btn" onclick="openCart()">
-      🛒 Cart <span class="cart-count" id="cart-count">0</span>
-    </button>
-  </div>
+  <button class="nav-cta" onclick="openCart()">View Cart (<span id="cart-count">0</span>)</button>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-glow"></div>
-  <!-- EDIT: Hero content -->
-  <div class="hero-tag"><span></span> PREMIUM QUALITY · INSTANT DELIVERY</div>
-  <h1>Buy Aged Reddit<br/>Accounts with <em>Real Karma</em></h1>
-  <p>Hand-grown, organically farmed Reddit accounts. Every account is verified, active, and delivered instantly after payment.</p>
-  <div class="hero-actions">
-    <button class="btn-primary" onclick="document.querySelector('.shop').scrollIntoView({behavior:'smooth'})">Browse Accounts →</button>
-    <button class="btn-ghost" onclick="document.querySelector('.how').scrollIntoView({behavior:'smooth'})">How It Works</button>
+  <div class="hero-left">
+    <div class="hero-eyebrow"><span class="hero-dot"></span> VERIFIED · ORGANIC · INSTANT</div>
+    <h1>Premium Reddit<br/>Accounts with<br/><em>Real Karma</em></h1>
+    <p class="hero-sub">Hand-grown Reddit accounts built on real iOS devices using USA proxies. Every account includes original email access and a login guarantee.</p>
+    <div class="hero-actions">
+      <button class="btn-red" onclick="scroll2('product-sec')">Browse Accounts →</button>
+      <button class="btn-outline" onclick="scroll2('how')">How It Works</button>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-stat hs1">
+      <span class="hs-icon">⚡</span>
+      <div><div class="hs-val">Instant</div><div class="hs-lbl">Delivery</div></div>
+    </div>
+    <div class="hero-card">
+      <div class="hc-top">
+        <span class="hc-badge">PREMIUM</span>
+        <span class="hc-live"><span></span> In Stock</span>
+      </div>
+      <div class="hc-title">Reddit Account</div>
+      <div class="hc-desc">Organically farmed account. Full email access included. Ready to use instantly after purchase.</div>
+      <div class="hc-specs">
+        <div class="hc-spec"><div class="hc-spec-val">✓</div><div class="hc-spec-lbl">Verified</div></div>
+        <div class="hc-spec"><div class="hc-spec-val">✓</div><div class="hc-spec-lbl">Email Incl.</div></div>
+        <div class="hc-spec"><div class="hc-spec-val">✓</div><div class="hc-spec-lbl">Guarantee</div></div>
+      </div>
+      <div class="hc-price-row">
+        <div class="hc-price">$<span id="hero-price">40</span><small>/ account</small></div>
+        <button class="buy-btn" onclick="scroll2('product-sec')">Buy Now</button>
+      </div>
+    </div>
+    <div class="hero-stat hs2">
+      <span class="hs-icon">🛡️</span>
+      <div><div class="hs-val">Login</div><div class="hs-lbl">Guarantee</div></div>
+    </div>
   </div>
 </section>
 
-<!-- TRUST BAR -->
-<div class="trust-bar">
-  <div class="trust-item"><span class="trust-icon">⚡</span> <strong>Instant</strong> Delivery</div>
-  <div class="trust-item"><span class="trust-icon">🔒</span> <strong>Crypto</strong> Payments</div>
-  <div class="trust-item"><span class="trust-icon">♻️</span> <strong>Free</strong> Replacement Guarantee</div>
-  <div class="trust-item"><span class="trust-icon">✋</span> <strong>Hand-grown</strong> Accounts</div>
-  <div class="trust-item"><span class="trust-icon">📧</span> <strong>Email</strong> Included</div>
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner" id="ticker-inner"></div>
 </div>
 
-<!-- SHOP -->
-<section class="shop">
-  <div class="section-header">
-    <div>
-      <div class="section-title">Available Accounts</div>
-      <!-- EDIT: Shop subtitle -->
-      <div class="section-sub">All accounts are checked hourly — stock updates in real time</div>
-    </div>
-    <div class="filters" id="filter-btns">
-      <button class="filter-pill active" onclick="filterBy('all',this)">All</button>
-      <button class="filter-pill" onclick="filterBy('standard',this)">Standard</button>
-      <button class="filter-pill" onclick="filterBy('medium',this)">Medium Karma</button>
-      <button class="filter-pill" onclick="filterBy('high',this)">High Karma</button>
-      <button class="filter-pill" onclick="filterBy('legendary',this)">Legendary</button>
+<!-- STATS -->
+<section class="stats">
+  <div class="stats-inner">
+    <div class="stat-box"><div class="stat-num">2,400+</div><div class="stat-lbl">Accounts Sold</div></div>
+    <div class="stat-box"><div class="stat-num">500+</div><div class="stat-lbl">Happy Clients</div></div>
+    <div class="stat-box"><div class="stat-num">24/7</div><div class="stat-lbl">Support</div></div>
+    <div class="stat-box"><div class="stat-num">100%</div><div class="stat-lbl">Hand-Grown</div></div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="why">
+  <div class="why-left">
+    <div class="sec-eyebrow">WHY ACCUNEST</div>
+    <h2>Your Trusted Reddit Account Partner</h2>
+    <p>We're not just another marketplace. Every account in our inventory is built by us — hand-grown on iOS devices using residential USA proxies with real posting history.</p>
+    <div class="guarantee-pill">
+      <span class="gp-icon">🔄</span>
+      <div class="gp-text">
+        <strong>Replacement Guarantee</strong>
+        <span>Account banned before first login? We replace it free, no questions asked.</span>
+      </div>
     </div>
   </div>
-  <div class="grid" id="product-grid"></div>
+  <div class="why-right">
+    <div class="why-feat"><div class="wf-icon">📱</div><div><div class="wf-title">Hand-crafted on iOS devices</div><div class="wf-desc">No bots, no automation — real human activity patterns</div></div></div>
+    <div class="why-feat"><div class="wf-icon">🌐</div><div><div class="wf-title">USA Residential Proxies</div><div class="wf-desc">Built with genuine USA IPs for maximum account longevity</div></div></div>
+    <div class="why-feat"><div class="wf-icon">📧</div><div><div class="wf-title">Original Email Included</div><div class="wf-desc">Full email credentials so you can update and secure the account</div></div></div>
+    <div class="why-feat"><div class="wf-icon">🔒</div><div><div class="wf-title">Ban-Resistant Methods</div><div class="wf-desc">Accounts built to last with clean posting history</div></div></div>
+    <div class="why-feat"><div class="wf-icon">⚡</div><div><div class="wf-title">Instant Delivery</div><div class="wf-desc">Credentials on screen + emailed within seconds of payment</div></div></div>
+    <div class="why-feat"><div class="wf-icon">💬</div><div><div class="wf-title">Personal Support Team</div><div class="wf-desc">Real humans ready to help with any issue</div></div></div>
+  </div>
 </section>
 
 <!-- HOW IT WORKS -->
-<section class="how">
-  <div class="section-title">How It Works</div>
-  <div class="steps">
-    <div class="step">
-      <div class="step-num">01</div>
-      <div class="step-title">Choose Your Account</div>
-      <div class="step-desc">Browse our inventory. Pick the karma tier and quantity that fits your needs.</div>
+<section class="how" id="how">
+  <div class="how-inner">
+    <div class="sec-header">
+      <div class="sec-eyebrow">PROCESS</div>
+      <div class="sec-title">How It Works</div>
+      <p class="sec-sub">From checkout to account access in under 60 seconds</p>
     </div>
-    <div class="step">
-      <div class="step-num">02</div>
-      <div class="step-title">Add to Cart</div>
-      <div class="step-desc">Select quantity (minimum 1), add to cart, enter your email for delivery.</div>
-    </div>
-    <div class="step">
-      <div class="step-num">03</div>
-      <div class="step-title">Pay with Crypto</div>
-      <div class="step-desc">Choose USDT, USDC, or BTC. Send the exact amount to our wallet address.</div>
-    </div>
-    <div class="step">
-      <div class="step-num">04</div>
-      <div class="step-title">Instant Delivery</div>
-      <div class="step-desc">Credentials appear on screen immediately and are also sent to your email.</div>
+    <div class="steps">
+      <div class="step"><div class="step-num">01</div><div class="step-title">Choose Quantity</div><div class="step-desc">Pick how many accounts you need and add them to your cart</div></div>
+      <div class="step"><div class="step-num">02</div><div class="step-title">Enter Your Email</div><div class="step-desc">Credentials will be delivered here after payment confirmation</div></div>
+      <div class="step"><div class="step-num">03</div><div class="step-title">Pay with Crypto</div><div class="step-desc">Send USDT, USDC or BTC to our wallet. Scan QR or copy address</div></div>
+      <div class="step"><div class="step-num">04</div><div class="step-title">Instant Delivery</div><div class="step-desc">Login details appear on screen & sent to your email immediately</div></div>
     </div>
   </div>
 </section>
 
-<!-- GUARANTEE -->
-<section class="guarantee">
-  <div class="section-title" style="margin-bottom:24px">Our Guarantees</div>
-  <div class="guarantee-box">
-    <!-- EDIT: Guarantee items -->
-    <div class="g-item">
-      <div class="g-icon">🔄</div>
-      <div>
-        <div class="g-title">Replacement Guarantee</div>
-        <div class="g-desc">Account banned before your first login? We'll replace it free of charge, no questions asked.</div>
+<!-- PRODUCT -->
+<section class="product-sec" id="product-sec">
+  <div class="sec-header">
+    <div class="sec-eyebrow">SHOP</div>
+    <div class="sec-title">Available Now</div>
+    <p class="sec-sub" id="prod-stock-txt">Accounts are checked hourly — all listings are active</p>
+  </div>
+  <div class="prod-card">
+    <div class="prod-top">
+      <div class="prod-header">
+        <span class="prod-badge" id="prod-badge">PREMIUM</span>
+        <span class="prod-stock"><span class="prod-stock-dot"></span> <span id="prod-stock-label">In Stock</span></span>
+      </div>
+      <div class="prod-title" id="prod-title">Reddit Account</div>
+      <div class="prod-desc" id="prod-desc">Organically farmed Reddit account, hand-grown on iOS devices using USA residential proxies. Comes with full original email credentials. Ready to use immediately after purchase. Login guarantee included — if the account isn't accessible on arrival, we'll replace it free.</div>
+      <div class="prod-tags" id="prod-tags">
+        <span class="prod-tag">✓ Email Included</span>
+        <span class="prod-tag">✓ Login Guarantee</span>
+        <span class="prod-tag">✓ Instant Delivery</span>
+        <span class="prod-tag">✓ Hand-Grown</span>
       </div>
     </div>
-    <div class="g-item">
-      <div class="g-icon">✅</div>
-      <div>
-        <div class="g-title">Hourly Stock Check</div>
-        <div class="g-desc">Every account is verified every hour. If it's shadowbanned, it's removed from the store automatically.</div>
+    <div class="prod-bottom">
+      <div class="prod-buy-row">
+        <div class="prod-price-block">
+          <div class="prod-price">$<span id="prod-price-display">40</span></div>
+          <div class="prod-price-sub">per account · crypto only</div>
+        </div>
+        <div class="qty-wrap">
+          <span class="qty-lbl">Qty</span>
+          <div class="qty-ctrl">
+            <button class="qty-btn" onclick="changeQty(-1)">−</button>
+            <span class="qty-num" id="qty-num">1</span>
+            <button class="qty-btn" onclick="changeQty(1)">+</button>
+          </div>
+          <button class="add-cart-btn" id="add-cart-btn" onclick="addToCart()">Add to Cart</button>
+        </div>
       </div>
+      <div class="prod-note">🔒 Secure checkout · Crypto payment · Instant delivery after confirmation</div>
     </div>
-    <div class="g-item">
-      <div class="g-icon">🌱</div>
-      <div>
-        <div class="g-title">Organically Farmed</div>
-        <div class="g-desc">All accounts are hand-grown with real activity — not bots, not cracked. Much longer lifespan guaranteed.</div>
-      </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews" id="reviews">
+  <div class="sec-header">
+    <div class="sec-eyebrow">REVIEWS</div>
+    <div class="sec-title">What Clients Say</div>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">"Delivery was instant. Account works perfectly — already posting in restricted subreddits. Highly recommend AccuNest."</div>
+      <div class="review-author">Alex M.</div>
+      <div class="review-handle">Marketing Agency</div>
     </div>
-    <div class="g-item">
-      <div class="g-icon">📧</div>
-      <div>
-        <div class="g-title">Email Access Included</div>
-        <div class="g-desc">Every account comes with its original Gmail or iCloud. Full access to reset passwords and update details.</div>
-      </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">"Bought 10 accounts. All came with email access, all working. Support was responsive when I had a question. Will order again."</div>
+      <div class="review-author">Jake R.</div>
+      <div class="review-handle">Content Creator</div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">"Finally found a reliable supplier. The replacement guarantee is real — they honored it without any hassle. Solid service."</div>
+      <div class="review-author">Sarah K.</div>
+      <div class="review-handle">SEO Specialist</div>
     </div>
   </div>
 </section>
 
 <!-- FAQ -->
-<section class="faq">
-  <div class="section-title">Frequently Asked Questions</div>
-  <div class="faq-list" id="faq-list"></div>
+<section class="faq" id="faq">
+  <div class="sec-header">
+    <div class="sec-eyebrow">FAQ</div>
+    <div class="sec-title">Common Questions</div>
+  </div>
+  <div class="faq-inner" id="faq-list"></div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">Karma<span>Kings</span></div>
-  <!-- EDIT: Footer text -->
-  <p>© 2025 KarmaKings · All accounts are sold as-is · Crypto only</p>
+  <div class="footer-logo">Accu<em>Nest</em></div>
+  <p>© 2025 AccuNest · All sales final · Crypto payments only</p>
 </footer>
 
 <!-- CART OVERLAY -->
@@ -372,227 +479,176 @@ footer p{color:var(--muted);font-size:13px}
   <div class="drawer" id="drawer"></div>
 </div>
 
+<!-- ADMIN PANEL -->
+<div id="admin-panel">
+  <div class="admin-box">
+    <div class="admin-head">
+      <div class="admin-title">🔧 AccuNest Admin Panel</div>
+      <button class="admin-close" onclick="closeAdmin()">✕</button>
+    </div>
+    <div class="admin-body">
+
+      <!-- Product -->
+      <div class="admin-sec">
+        <div class="admin-sec-title"><span class="admin-sec-icon">📦</span> Product Settings</div>
+        <div class="adm-row"><div class="adm-lbl">Product Title</div><input class="adm-inp" id="adm-title" type="text"/></div>
+        <div class="adm-row"><div class="adm-lbl">Description</div><textarea class="adm-textarea" id="adm-desc"></textarea></div>
+        <div class="adm-2col">
+          <div class="adm-row"><div class="adm-lbl">Price (USD)</div><input class="adm-inp" id="adm-price" type="number" min="1"/></div>
+          <div class="adm-row"><div class="adm-lbl">Badge Text</div><input class="adm-inp" id="adm-badge" type="text"/></div>
+        </div>
+        <div class="adm-toggle">
+          <input type="checkbox" id="adm-instock"/>
+          <label for="adm-instock">Product In Stock (uncheck = show Out of Stock)</label>
+        </div>
+        <button class="adm-save-btn" onclick="saveProduct()">Save Product</button>
+      </div>
+
+      <!-- Wallets -->
+      <div class="admin-sec">
+        <div class="admin-sec-title"><span class="admin-sec-icon">💰</span> Crypto Wallets</div>
+        <div class="adm-row"><div class="adm-lbl">USDT Address</div><input class="adm-inp" id="adm-usdt" type="text"/></div>
+        <div class="adm-row"><div class="adm-lbl">USDC Address</div><input class="adm-inp" id="adm-usdc" type="text"/></div>
+        <div class="adm-row"><div class="adm-lbl">BTC Address</div><input class="adm-inp" id="adm-btc" type="text"/></div>
+        <button class="adm-save-btn" onclick="saveWallets()">Save Wallets</button>
+      </div>
+
+      <!-- Stats -->
+      <div class="admin-sec">
+        <div class="admin-sec-title"><span class="admin-sec-icon">📊</span> Homepage Stats</div>
+        <div class="adm-2col">
+          <div class="adm-row"><div class="adm-lbl">Accounts Sold</div><input class="adm-inp" id="adm-stat1" type="text"/></div>
+          <div class="adm-row"><div class="adm-lbl">Happy Clients</div><input class="adm-inp" id="adm-stat2" type="text"/></div>
+        </div>
+        <button class="adm-save-btn" onclick="saveStats()">Save Stats</button>
+      </div>
+
+      <!-- EmailJS -->
+      <div class="admin-sec">
+        <div class="admin-sec-title"><span class="admin-sec-icon">✉️</span> EmailJS Config</div>
+        <div class="adm-row"><div class="adm-lbl">Service ID</div><input class="adm-inp" id="adm-ejs-svc" type="text"/></div>
+        <div class="adm-row"><div class="adm-lbl">Template ID</div><input class="adm-inp" id="adm-ejs-tpl" type="text"/></div>
+        <div class="adm-row"><div class="adm-lbl">Public Key</div><input class="adm-inp" id="adm-ejs-key" type="text"/></div>
+        <button class="adm-save-btn" onclick="saveEmailJS()">Save EmailJS</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
-// ================================================================
-// EMAILJS CONFIG — EDIT HERE
-// ================================================================
-emailjs.init("mA5DRqzQYdx8y1t3A");
-const EMAILJS_SERVICE  = "service_93qn336";
-const EMAILJS_TEMPLATE = "template_4qskczp";
-
-// ================================================================
-// CRYPTO WALLETS — EDIT HERE
-// ================================================================
-const WALLETS = {
-  USDT: "0xcc7d6021ce696c32e8aa1d402c7fe93c928bdf94",
-  USDC: "0xcc7d6021ce696c32e8aa1d402c7fe93c928bdf94",
-  BTC:  "0xcc7d6021ce696c32e8aa1d402c7fe93c928bdf94",
+// ═══════════════════════════════════════════════
+// DEFAULT CONFIG — Admin se override hoga
+// ═══════════════════════════════════════════════
+let CONFIG = {
+  product: {
+    title: "Reddit Account",
+    desc: "Organically farmed Reddit account, hand-grown on iOS devices using USA residential proxies. Comes with full original email credentials. Ready to use immediately after purchase. Login guarantee included — if the account isn't accessible on arrival, we'll replace it free.",
+    price: 40,
+    badge: "PREMIUM",
+    inStock: true,
+  },
+  wallets: {
+    USDT: "0xcc7d6021ce696c32e8aa1d402c7fe93c928bdf94",
+    USDC: "0xcc7d6021ce696c32e8aa1d402c7fe93c928bdf94",
+    BTC:  "0xcc7d6021ce696c32e8aa1d402c7fe93c928bdf94",
+  },
+  stats: { sold: "2,400+", clients: "500+" },
+  emailjs: {
+    svc: "service_93qn336",
+    tpl: "template_4qskczp",
+    key: "mA5DRqzQYdx8y1t3A",
+  },
 };
 
-// ================================================================
-// QR IMAGES — EDIT HERE (upload to GitHub with these names)
-// ================================================================
-const QR_IMAGES = {
-  USDT: "qr-usdt.png",
-  USDC: "qr-usdc.png",
-  BTC:  "qr-btc.png",
-};
-
-// Live rates (auto-fetched)
+const QR = { USDT:"qr-usdt.png", USDC:"qr-usdc.png", BTC:"qr-btc.png" };
 const RATES = { USDT:1, USDC:1, BTC:67000 };
 
-// ================================================================
-// PRODUCTS — EDIT HERE
-// id, title, desc, tier (standard/medium/high/legendary),
-// karma, age, price (USD), minQty, stock (number)
-// ================================================================
-const PRODUCTS = [
-  {
-    id:1,
-    title:"Starter Account",
-    desc:"Fresh hand-grown account. Perfect for warm-up campaigns and basic Reddit access.",
-    tier:"standard",
-    karma:"500+",
-    age:"1–3 months",
-    price:5,
-    minQty:1,
-    stock:47,
-  },
-  {
-    id:2,
-    title:"Medium Karma Account",
-    desc:"Established account with solid karma. Post in most subreddits without restrictions.",
-    tier:"medium",
-    karma:"2,500+",
-    age:"3–6 months",
-    price:15,
-    minQty:1,
-    stock:23,
-  },
-  {
-    id:3,
-    title:"High Karma Account",
-    desc:"High-trust account. Bypass karma gates, post links, and gain community credibility instantly.",
-    tier:"high",
-    karma:"10,000+",
-    age:"6–12 months",
-    price:35,
-    minQty:1,
-    stock:9,
-  },
-  {
-    id:4,
-    title:"Legendary Account",
-    desc:"Elite aged account with massive karma. Trusted by top subreddit moderators and communities.",
-    tier:"legendary",
-    karma:"50,000+",
-    age:"1–3 years",
-    price:75,
-    minQty:1,
-    stock:3,
-  },
-];
+// Load from localStorage
+function loadConfig() {
+  const s = localStorage.getItem("accunest_config");
+  if(s) { try { CONFIG = {...CONFIG, ...JSON.parse(s)}; } catch(e){} }
+}
+function saveConfig() { localStorage.setItem("accunest_config", JSON.stringify(CONFIG)); }
 
-// ================================================================
-// FAQ — EDIT HERE
-// ================================================================
-const FAQS = [
-  {q:"What do I receive after purchase?", a:"You receive the Reddit username, password, and the associated email credentials. All delivered instantly on-screen and via email."},
-  {q:"Do the accounts come with email access?", a:"Yes. Every account includes its original Gmail or iCloud email and password so you can update recovery details safely."},
-  {q:"What if the account gets banned before I log in?", a:"We offer a full replacement guarantee. If the account is banned or suspended before your first successful login, contact us and we'll replace it free."},
-  {q:"How are the accounts created?", a:"All accounts are manually hand-grown on real devices using residential proxies. No bots, no cracks — 100% organic activity history."},
-  {q:"Which cryptocurrencies do you accept?", a:"We accept USDT, USDC, and BTC. All payments are final and non-refundable once confirmed on-chain."},
-  {q:"Can I buy in bulk?", a:"Yes! Add the quantity you need directly in the cart. For large bulk orders, contact us for custom pricing."},
-];
+// ═══════════════════════════════════════════════
+// APPLY CONFIG TO PAGE
+// ═══════════════════════════════════════════════
+function applyConfig() {
+  const p = CONFIG.product;
+  document.getElementById("prod-title").textContent = p.title;
+  document.getElementById("prod-desc").textContent = p.desc;
+  document.getElementById("prod-price-display").textContent = p.price;
+  document.getElementById("hero-price").textContent = p.price;
+  document.getElementById("prod-badge").textContent = p.badge;
+  document.getElementById("adm-instock").checked = p.inStock;
 
-// ================================================================
-// STATE
-// ================================================================
-let cart = [];
-let quantities = {}; // productId -> qty selected
+  const stockLbl = document.getElementById("prod-stock-label");
+  const addBtn = document.getElementById("add-cart-btn");
+  if(p.inStock) {
+    stockLbl.textContent = "In Stock";
+    stockLbl.parentElement.style.color = "var(--green)";
+    addBtn.disabled = false;
+    addBtn.style.opacity = "1";
+  } else {
+    stockLbl.textContent = "Out of Stock";
+    stockLbl.parentElement.style.color = "#ef4444";
+    addBtn.disabled = true;
+    addBtn.style.opacity = ".4";
+  }
+  // stats
+  const statNums = document.querySelectorAll(".stat-num");
+  if(statNums[0]) statNums[0].textContent = CONFIG.stats.sold;
+  if(statNums[1]) statNums[1].textContent = CONFIG.stats.clients;
+  // emailjs
+  if(CONFIG.emailjs.key) emailjs.init(CONFIG.emailjs.key);
+}
+
+// ═══════════════════════════════════════════════
+// CART STATE
+// ═══════════════════════════════════════════════
+let cartQty = 0;
 let selectedCrypto = "USDT";
 let view = "cart";
-let activeFilter = "all";
 let buyerEmail = "";
+let currentQty = 1;
 
-// Init qty
-PRODUCTS.forEach(p => { quantities[p.id] = p.minQty; });
-
-// ================================================================
-// RATES — Live fetch
-// ================================================================
 async function fetchRates() {
   try {
     const r = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd");
     const d = await r.json();
     if(d.bitcoin) RATES.BTC = d.bitcoin.usd;
-  } catch(e) {}
+  } catch(e){}
 }
 fetchRates();
 
-// ================================================================
-// RENDER PRODUCTS
-// ================================================================
-function tierBadge(tier) {
-  const map = {standard:"badge-standard",medium:"badge-medium",high:"badge-high",legendary:"badge-legendary"};
-  const label = {standard:"STANDARD",medium:"MED KARMA",high:"HIGH KARMA",legendary:"LEGENDARY"};
-  return `<span class="card-badge ${map[tier]}">${label[tier]}</span>`;
-}
-function stockStatus(s) {
-  if(s<=0) return `<span class="card-stock"><span class="stock-dot out"></span>Out of Stock</span>`;
-  if(s<=5) return `<span class="card-stock"><span class="stock-dot low"></span>${s} left</span>`;
-  return `<span class="card-stock"><span class="stock-dot"></span>${s} in stock</span>`;
+function changeQty(delta) {
+  currentQty = Math.max(1, currentQty + delta);
+  document.getElementById("qty-num").textContent = currentQty;
 }
 
-function renderGrid() {
-  const list = activeFilter==="all" ? PRODUCTS : PRODUCTS.filter(p=>p.tier===activeFilter);
-  const g = document.getElementById("product-grid");
-  g.innerHTML = list.map(p => {
-    const qty = quantities[p.id];
-    const inCart = cart.find(c=>c.id===p.id);
-    const outOfStock = p.stock <= 0;
-    return `
-    <div class="card">
-      <div class="card-top">
-        ${tierBadge(p.tier)}
-        ${stockStatus(p.stock)}
-      </div>
-      <div class="card-title">${p.title}</div>
-      <div class="card-desc">${p.desc}</div>
-      <div class="card-specs">
-        <div class="spec">
-          <div class="spec-label">Karma</div>
-          <div class="spec-val">${p.karma}</div>
-        </div>
-        <div class="spec">
-          <div class="spec-label">Age</div>
-          <div class="spec-val">${p.age}</div>
-        </div>
-      </div>
-      <div class="card-footer">
-        <div class="card-price">$${p.price}<small>/ acc</small></div>
-        ${outOfStock ? `<span class="out-btn">Out of Stock</span>` : `
-          <div style="display:flex;align-items:center;gap:8px">
-            <div class="qty-control">
-              <button class="qty-btn" onclick="changeQty(${p.id},-1)">−</button>
-              <span class="qty-val" id="qty-${p.id}">${qty}</span>
-              <button class="qty-btn" onclick="changeQty(${p.id},1)">+</button>
-            </div>
-            <button class="add-btn ${inCart?'added':''}" onclick="toggleCart(${p.id})">
-              ${inCart ? "✓ Added" : "Add"}
-            </button>
-          </div>`}
-      </div>
-    </div>`;
-  }).join("");
-}
-
-function changeQty(id, delta) {
-  const p = PRODUCTS.find(x=>x.id===id);
-  const newQty = Math.max(p.minQty, quantities[id] + delta);
-  quantities[id] = newQty;
-  const el = document.getElementById(`qty-${id}`);
-  if(el) el.textContent = newQty;
-  // Update cart if already added
-  const ci = cart.find(c=>c.id===id);
-  if(ci){ ci.qty = newQty; updateCount(); }
-}
-
-function toggleCart(id) {
-  const p = PRODUCTS.find(x=>x.id===id);
-  if(!p || p.stock<=0) return;
-  const existing = cart.find(c=>c.id===id);
-  if(existing){ cart = cart.filter(c=>c.id!==id); }
-  else { cart.push({...p, qty: quantities[p.id]}); }
+function addToCart() {
+  if(!CONFIG.product.inStock) return;
+  cartQty = currentQty;
   updateCount();
-  renderGrid();
+  const btn = document.getElementById("add-cart-btn");
+  btn.textContent = "✓ Added";
+  btn.classList.add("added");
+  setTimeout(()=>{ btn.textContent="Add to Cart"; btn.classList.remove("added"); }, 1800);
+  openCart();
 }
 
-function updateCount() {
-  document.getElementById("cart-count").textContent = cart.reduce((s,c)=>s+c.qty,0);
-}
-
-function totalUSD() { return cart.reduce((s,c)=>s+(c.price*c.qty),0); }
+function updateCount() { document.getElementById("cart-count").textContent = cartQty; }
+function totalUSD() { return CONFIG.product.price * cartQty; }
 function cryptoAmt() {
-  const amt = totalUSD()/RATES[selectedCrypto];
-  if(selectedCrypto==="USDT"||selectedCrypto==="USDC") return amt.toFixed(2);
-  return amt.toFixed(6);
+  const a = totalUSD() / RATES[selectedCrypto];
+  return selectedCrypto==="BTC" ? a.toFixed(6) : a.toFixed(2);
 }
 
-// ================================================================
-// FILTER
-// ================================================================
-function filterBy(cat, btn) {
-  activeFilter = cat;
-  document.querySelectorAll(".filter-pill").forEach(b=>b.classList.remove("active"));
-  btn.classList.add("active");
-  renderGrid();
-}
-
-// ================================================================
-// CART OVERLAY
-// ================================================================
+// ═══════════════════════════════════════════════
+// DRAWER
+// ═══════════════════════════════════════════════
 function openCart() { view="cart"; renderDrawer(); document.getElementById("overlay").classList.add("open"); }
 function closeCart() { document.getElementById("overlay").classList.remove("open"); }
 
@@ -600,188 +656,231 @@ function renderDrawer() {
   const d = document.getElementById("drawer");
 
   if(view==="cart") {
-    if(cart.length===0) {
+    if(cartQty===0) {
       d.innerHTML=`
-        <div class="drawer-head">
-          <div class="drawer-title">Your Cart</div>
-          <button class="drawer-close" onclick="closeCart()">✕</button>
-        </div>
-        <div class="drawer-body">
-          <div class="empty-cart">
-            <div class="empty-em">🛒</div>
-            <p>Your cart is empty</p>
-          </div>
-        </div>`;
+        <div class="d-head"><div class="d-title">Your Cart</div><button class="d-close" onclick="closeCart()">✕</button></div>
+        <div class="d-body"><div class="empty-cart"><div class="empty-em">🛒</div><p>Cart is empty</p></div></div>`;
       return;
     }
     d.innerHTML=`
-      <div class="drawer-head">
-        <div class="drawer-title">Your Cart</div>
-        <button class="drawer-close" onclick="closeCart()">✕</button>
-      </div>
-      <div class="drawer-body">
-        ${cart.map(c=>`
-          <div class="cart-item">
-            <div class="ci-left">
-              <div class="ci-name">${c.title}</div>
-              <div class="ci-meta">${c.karma} karma · ${c.age}</div>
-              <div class="ci-qty">Qty: ${c.qty} × $${c.price} = $${(c.qty*c.price).toFixed(2)}</div>
-            </div>
-            <div class="ci-price">$${(c.qty*c.price).toFixed(2)}</div>
-            <button class="ci-remove" onclick="removeItem(${c.id})">✕</button>
-          </div>`).join("")}
-        <div class="total-row">
-          <span class="total-label">Total</span>
-          <span class="total-val">$${totalUSD().toFixed(2)} USD</span>
+      <div class="d-head"><div class="d-title">Your Cart</div><button class="d-close" onclick="closeCart()">✕</button></div>
+      <div class="d-body">
+        <div class="ci">
+          <div class="ci-info">
+            <div class="ci-name">${CONFIG.product.title}</div>
+            <div class="ci-meta">$${CONFIG.product.price} × ${cartQty} account${cartQty>1?'s':''}</div>
+          </div>
+          <div class="ci-right">
+            <div class="ci-price">$${totalUSD().toFixed(2)}</div>
+            <div class="ci-qty">${cartQty} unit${cartQty>1?'s':''}</div>
+          </div>
+          <button class="ci-remove" onclick="cartQty=0;updateCount();renderDrawer()">✕</button>
         </div>
-        <div class="input-group">
-          <div class="input-label">Your Email (for delivery)</div>
-          <input class="input-field" type="email" placeholder="you@example.com" id="email-input" value="${buyerEmail}" oninput="buyerEmail=this.value"/>
+        <div class="total-box">
+          <span class="total-lbl">Total</span>
+          <span class="total-val">$${totalUSD().toFixed(2)}</span>
         </div>
-        <p class="step-lbl">Select cryptocurrency</p>
-        <div class="crypto-grid">
+        <div class="inp-lbl">Your Email — credentials delivered here</div>
+        <input class="inp" type="email" id="email-inp" placeholder="you@example.com" value="${buyerEmail}" oninput="buyerEmail=this.value;document.querySelector('.big-btn').disabled=!this.value.includes('@')"/>
+        <div class="step-lbl">Select Cryptocurrency</div>
+        <div class="crypto-row">
           ${["USDT","USDC","BTC"].map(c=>`
-            <div class="crypto-card ${selectedCrypto===c?"sel":""}" onclick="pickCrypto('${c}')">
-              <div class="crypto-em">${c==="USDT"?"💵":c==="USDC"?"🔵":"₿"}</div>
-              <div class="crypto-name">${c}</div>
+            <div class="crypto-opt ${selectedCrypto===c?"sel":""}" onclick="selectedCrypto='${c}';renderDrawer()">
+              <div class="c-em">${c==="USDT"?"💵":c==="USDC"?"🔵":"₿"}</div>
+              <div class="c-name">${c}</div>
             </div>`).join("")}
         </div>
       </div>
-      <div class="drawer-foot">
-        <button class="pay-btn" onclick="goPayment()" ${!buyerEmail?"disabled":""}>Proceed to Payment →</button>
-        <p style="font-size:11px;color:var(--muted);text-align:center;margin-top:8px">Email required for delivery</p>
+      <div class="d-foot">
+        <button class="big-btn" onclick="goPayment()" ${!buyerEmail.includes("@")?"disabled":""}>Proceed to Payment →</button>
+        <p style="font-size:11px;color:var(--muted2);text-align:center;margin-top:8px">Email required for delivery</p>
       </div>`;
-
-    // Re-bind email input live check
-    setTimeout(()=>{
-      const inp = document.getElementById("email-input");
-      if(inp) inp.addEventListener("input", e=>{
-        buyerEmail=e.target.value;
-        const btn = document.querySelector(".pay-btn");
-        if(btn) btn.disabled = !buyerEmail.includes("@");
-      });
-    },50);
   }
 
   else if(view==="payment") {
-    fetchRates().then(()=>{ /* rates refreshed */ });
     d.innerHTML=`
-      <div class="drawer-head">
-        <div class="drawer-title">Payment</div>
-        <button class="drawer-close" onclick="view='cart';renderDrawer()">←</button>
-      </div>
-      <div class="drawer-body">
-        <div class="amount-display">
-          <div class="amount-crypto">${cryptoAmt()} ${selectedCrypto}</div>
-          <div class="amount-usd">≈ $${totalUSD().toFixed(2)} USD</div>
+      <div class="d-head"><div class="d-title">Payment</div><button class="d-close" onclick="view='cart';renderDrawer()">←</button></div>
+      <div class="d-body">
+        <div class="amt-display">
+          <div class="amt-big">${cryptoAmt()} ${selectedCrypto}</div>
+          <div class="amt-usd">≈ $${totalUSD().toFixed(2)} USD</div>
         </div>
-        <div class="qr-box">
-          <img class="qr-img" src="${QR_IMAGES[selectedCrypto]}" alt="QR Code"/>
-        </div>
-        <div class="wallet-section">
-          <div class="wallet-label-row">
-            <span class="wallet-label">Wallet Address</span>
+        <div class="qr-box"><img class="qr-img" src="${QR[selectedCrypto]}" alt="QR"/></div>
+        <div>
+          <div class="wallet-lbl-row">
+            <span class="wallet-lbl">Wallet Address</span>
             <button class="copy-btn" onclick="copyWallet()">Copy</button>
           </div>
-          <div class="wallet-addr" onclick="copyWallet()" id="wallet-addr">${WALLETS[selectedCrypto]}</div>
+          <div class="wallet-box" onclick="copyWallet()" id="wallet-addr">${CONFIG.wallets[selectedCrypto]}</div>
         </div>
-        <div class="warn-box">⚠️ Send <strong>exactly ${cryptoAmt()} ${selectedCrypto}</strong> to the address above. Wrong amount or wrong network will result in lost funds.</div>
+        <div class="warn">⚠️ Send exactly <strong>${cryptoAmt()} ${selectedCrypto}</strong>. Wrong amount = lost funds.</div>
       </div>
-      <div class="drawer-foot">
-        <button class="confirm-btn" onclick="confirmPayment()">✓ I Have Sent the Payment</button>
-        <span class="back-link" onclick="view='cart';renderDrawer()">← Back to cart</span>
+      <div class="d-foot">
+        <button class="big-btn big-btn-green" onclick="confirmPayment()">✓ I Have Sent Payment</button>
+        <span class="back-link" onclick="view='cart';renderDrawer()">← Back</span>
       </div>`;
   }
 
   else if(view==="success") {
     d.innerHTML=`
-      <div class="drawer-head">
-        <div class="drawer-title">Order Complete</div>
-        <button class="drawer-close" onclick="fullReset()">✕</button>
-      </div>
-      <div class="drawer-body">
+      <div class="d-head"><div class="d-title">Order Complete</div><button class="d-close" onclick="fullReset()">✕</button></div>
+      <div class="d-body">
         <div class="success-top">
-          <div class="success-emoji">🎉</div>
-          <div class="success-title">Payment Confirmed!</div>
-          <div class="success-sub">Your account details are below. Screenshot this page — details also sent to <strong>${buyerEmail}</strong></div>
+          <div class="s-em">🎉</div>
+          <div class="s-title">Payment Confirmed!</div>
+          <div class="s-sub">Your order has been received. Details sent to <strong>${buyerEmail}</strong></div>
         </div>
         <div class="delivery-box">
-          <div class="delivery-title">📦 Your Account Details</div>
-          ${cart.map(c=>`
-            <div class="detail-row">
-              <span class="detail-key">${c.title} ×${c.qty}</span>
-              <span class="detail-val">Delivered to email</span>
-            </div>`).join("")}
-          <div class="detail-row">
-            <span class="detail-key">Amount Paid</span>
-            <span class="detail-val" style="color:var(--gold)">${cryptoAmt()} ${selectedCrypto}</span>
-          </div>
+          <div class="del-title">📦 Order Summary</div>
+          <div class="del-row"><span class="del-k">${CONFIG.product.title}</span><span class="del-v">×${cartQty} — Delivering to email</span></div>
+          <div class="del-row"><span class="del-k">Amount Paid</span><span class="del-v" style="color:var(--accent);font-family:'Bricolage Grotesque',sans-serif">${cryptoAmt()} ${selectedCrypto}</span></div>
+          <div class="del-row"><span class="del-k">Delivered To</span><span class="del-v">${buyerEmail}</span></div>
         </div>
-        <p class="email-note">📧 Full credentials sent to ${buyerEmail}</p>
+        <p class="email-note">📧 Full account credentials emailed to you</p>
         <button class="done-btn" onclick="fullReset()">Continue Shopping</button>
       </div>`;
   }
 }
 
 function copyWallet() {
-  navigator.clipboard.writeText(WALLETS[selectedCrypto]).catch(()=>{});
-  const el = document.getElementById("wallet-addr");
-  if(el){ el.textContent="✓ Copied!"; setTimeout(()=>{ el.textContent=WALLETS[selectedCrypto]; },2000); }
+  navigator.clipboard.writeText(CONFIG.wallets[selectedCrypto]).catch(()=>{});
+  const el=document.getElementById("wallet-addr");
+  if(el){el.textContent="✓ Copied!";setTimeout(()=>{el.textContent=CONFIG.wallets[selectedCrypto];},2000);}
 }
 
-function removeItem(id) { cart=cart.filter(c=>c.id!==id); updateCount(); renderDrawer(); }
-function pickCrypto(c) { selectedCrypto=c; renderDrawer(); }
-
 async function goPayment() {
-  const inp = document.getElementById("email-input");
-  buyerEmail = inp ? inp.value : buyerEmail;
-  if(!buyerEmail || !buyerEmail.includes("@")) return;
+  const inp=document.getElementById("email-inp");
+  buyerEmail=inp?inp.value:buyerEmail;
+  if(!buyerEmail.includes("@")) return;
   await fetchRates();
-  view="payment";
-  renderDrawer();
+  view="payment"; renderDrawer();
 }
 
 async function confirmPayment() {
-  view="success";
-  renderDrawer();
-  // Send email via EmailJS
+  view="success"; renderDrawer();
   try {
-    const details = cart.map(c=>`${c.title} ×${c.qty} | Karma: ${c.karma} | Age: ${c.age}`).join("\n");
-    await emailjs.send(EMAILJS_SERVICE, EMAILJS_TEMPLATE, {
+    await emailjs.send(CONFIG.emailjs.svc, CONFIG.emailjs.tpl, {
       buyer_name:  buyerEmail.split("@")[0],
       buyer_email: buyerEmail,
-      details:     details,
+      details:     `${CONFIG.product.title} ×${cartQty}`,
       total:       `$${totalUSD().toFixed(2)} USD`,
       crypto:      `${cryptoAmt()} ${selectedCrypto}`,
     });
-  } catch(e) { console.log("Email error:", e); }
+  } catch(e){ console.log("Email err:", e); }
 }
 
-function fullReset() { cart=[]; buyerEmail=""; updateCount(); renderGrid(); closeCart(); view="cart"; }
+function fullReset() { cartQty=0; buyerEmail=""; view="cart"; updateCount(); closeCart(); currentQty=1; document.getElementById("qty-num").textContent=1; }
 
-// Close on backdrop click
-document.getElementById("overlay").addEventListener("click", function(e){ if(e.target===this) closeCart(); });
+document.getElementById("overlay").addEventListener("click",function(e){if(e.target===this)closeCart();});
 
-// ================================================================
-// FAQ ACCORDION
-// ================================================================
-function renderFAQ() {
-  document.getElementById("faq-list").innerHTML = FAQS.map((f,i)=>`
+// ═══════════════════════════════════════════════
+// FAQ
+// ═══════════════════════════════════════════════
+const FAQS=[
+  {q:"What do I get after payment?",a:"You receive the Reddit username, password, and original email credentials — instantly on screen and sent to your email address."},
+  {q:"Do accounts include email access?",a:"Yes. Every account comes with its original Gmail or iCloud email and password so you can secure and update it."},
+  {q:"What is the replacement guarantee?",a:"If the account is banned or inaccessible before your first login, we replace it for free — no questions asked."},
+  {q:"Which cryptocurrencies do you accept?",a:"We accept USDT, USDC, and BTC. All payments are final once confirmed on-chain."},
+  {q:"How are accounts created?",a:"All accounts are manually hand-grown on real iOS devices using USA residential proxies. Zero bots, zero cracking."},
+  {q:"Can I buy multiple accounts?",a:"Yes! Set the quantity you need in the cart. Bulk orders are welcome."},
+];
+
+function renderFAQ(){
+  document.getElementById("faq-list").innerHTML=FAQS.map((f,i)=>`
     <div class="faq-item" id="faq-${i}">
-      <div class="faq-q" onclick="toggleFAQ(${i})">${f.q} <span>+</span></div>
+      <div class="faq-q" onclick="toggleFAQ(${i})">${f.q}<span class="faq-icon">+</span></div>
       <div class="faq-a"><div class="faq-a-inner">${f.a}</div></div>
     </div>`).join("");
 }
-function toggleFAQ(i) {
-  const el = document.getElementById(`faq-${i}`);
-  el.classList.toggle("open");
+function toggleFAQ(i){document.getElementById(`faq-${i}`).classList.toggle("open");}
+
+// ═══════════════════════════════════════════════
+// TICKER
+// ═══════════════════════════════════════════════
+function renderTicker(){
+  const items=["⚡ Instant Delivery","🔒 Crypto Payments","🛡️ Login Guarantee","✋ Hand-Grown Accounts","📧 Email Included","🌱 Organic Farming","💬 24/7 Support","♻️ Free Replacement"];
+  const repeated=[...items,...items];
+  document.getElementById("ticker-inner").innerHTML=repeated.map(t=>`<span class="ticker-item">${t}<span class="ticker-dot">•</span></span>`).join("");
 }
 
-// ================================================================
+// ═══════════════════════════════════════════════
+// ADMIN PANEL
+// ═══════════════════════════════════════════════
+// Secret: type "adminaccu" anywhere on page
+let adminBuffer="";
+document.addEventListener("keydown",function(e){
+  adminBuffer+=e.key;
+  if(adminBuffer.length>9) adminBuffer=adminBuffer.slice(-9);
+  if(adminBuffer==="adminaccu") openAdmin();
+});
+
+function openAdmin(){
+  // Populate fields
+  document.getElementById("adm-title").value=CONFIG.product.title;
+  document.getElementById("adm-desc").value=CONFIG.product.desc;
+  document.getElementById("adm-price").value=CONFIG.product.price;
+  document.getElementById("adm-badge").value=CONFIG.product.badge;
+  document.getElementById("adm-instock").checked=CONFIG.product.inStock;
+  document.getElementById("adm-usdt").value=CONFIG.wallets.USDT;
+  document.getElementById("adm-usdc").value=CONFIG.wallets.USDC;
+  document.getElementById("adm-btc").value=CONFIG.wallets.BTC;
+  document.getElementById("adm-stat1").value=CONFIG.stats.sold;
+  document.getElementById("adm-stat2").value=CONFIG.stats.clients;
+  document.getElementById("adm-ejs-svc").value=CONFIG.emailjs.svc;
+  document.getElementById("adm-ejs-tpl").value=CONFIG.emailjs.tpl;
+  document.getElementById("adm-ejs-key").value=CONFIG.emailjs.key;
+  document.getElementById("admin-panel").classList.add("open");
+}
+function closeAdmin(){ document.getElementById("admin-panel").classList.remove("open"); adminBuffer=""; }
+
+function saveProduct(){
+  CONFIG.product={
+    title: document.getElementById("adm-title").value,
+    desc:  document.getElementById("adm-desc").value,
+    price: parseFloat(document.getElementById("adm-price").value)||40,
+    badge: document.getElementById("adm-badge").value,
+    inStock: document.getElementById("adm-instock").checked,
+  };
+  saveConfig(); applyConfig();
+  alert("✓ Product saved!");
+}
+function saveWallets(){
+  CONFIG.wallets={
+    USDT: document.getElementById("adm-usdt").value,
+    USDC: document.getElementById("adm-usdc").value,
+    BTC:  document.getElementById("adm-btc").value,
+  };
+  saveConfig();
+  alert("✓ Wallets saved!");
+}
+function saveStats(){
+  CONFIG.stats={
+    sold:    document.getElementById("adm-stat1").value,
+    clients: document.getElementById("adm-stat2").value,
+  };
+  saveConfig(); applyConfig();
+  alert("✓ Stats saved!");
+}
+function saveEmailJS(){
+  CONFIG.emailjs={
+    svc: document.getElementById("adm-ejs-svc").value,
+    tpl: document.getElementById("adm-ejs-tpl").value,
+    key: document.getElementById("adm-ejs-key").value,
+  };
+  saveConfig();
+  emailjs.init(CONFIG.emailjs.key);
+  alert("✓ EmailJS saved!");
+}
+
+function scroll2(id){ document.getElementById(id)?.scrollIntoView({behavior:"smooth"}); }
+
+// ═══════════════════════════════════════════════
 // INIT
-// ================================================================
-renderGrid();
+// ═══════════════════════════════════════════════
+loadConfig();
+applyConfig();
 renderFAQ();
+renderTicker();
 </script>
 </body>
 </html>
