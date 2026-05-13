@@ -806,11 +806,11 @@ function renderTicker(){
 // ═══════════════════════════════════════════════
 // ADMIN PANEL
 // ═══════════════════════════════════════════════
-// Secret: type "adminaccu524" anywhere on page
+// Secret: type "adminaccu" anywhere on page
 let adminBuffer="";
 document.addEventListener("keydown",function(e){
   adminBuffer+=e.key;
-  if(adminBuffer.length>9) adminBuffer=adminBuffer.slice(-9);
+  if(adminBuffer.length>12) adminBuffer=adminBuffer.slice(-12);
   if(adminBuffer==="adminaccu524") openAdmin();
 });
 
